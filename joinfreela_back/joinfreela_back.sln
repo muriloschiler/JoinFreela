@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "joinfreela.Infrastructure",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "joinfreela.Application", "joinfreela.Application\joinfreela.Application.csproj", "{574860C8-1BE2-451C-A8FB-8B569DCCDF9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "joinfreela.API", "joinfreela.API\joinfreela.API.csproj", "{1297462C-E356-413C-A5BF-F897BC7BDC0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "joinfreela.API", "joinfreela.API\joinfreela.API.csproj", "{39646665-F34E-4994-B6AC-D63266EB9461}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +36,9 @@ Global
 		{1297462C-E356-413C-A5BF-F897BC7BDC0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1297462C-E356-413C-A5BF-F897BC7BDC0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1297462C-E356-413C-A5BF-F897BC7BDC0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39646665-F34E-4994-B6AC-D63266EB9461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39646665-F34E-4994-B6AC-D63266EB9461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39646665-F34E-4994-B6AC-D63266EB9461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39646665-F34E-4994-B6AC-D63266EB9461}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
