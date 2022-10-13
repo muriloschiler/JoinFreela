@@ -1,4 +1,3 @@
-using joinfreela.Domain.Classes;
 using joinfreela.Domain.Classes.Base;
 
 namespace joinfreela.Domain.Models
@@ -7,5 +6,6 @@ namespace joinfreela.Domain.Models
     {
         public List<UserSkill> Skills  { get; set; }
         public List<Nomination> Nominations { get; set; }
+        public List<Contract> Contracts { get; set; }
     }
 }

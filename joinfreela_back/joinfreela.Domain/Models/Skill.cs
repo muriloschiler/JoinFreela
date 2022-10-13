@@ -4,7 +4,7 @@ namespace joinfreela.Domain.Models
 {
     public class Skill: Register
     {
-        public string Title { get; set; }
+        public string Name { get; set; }
         public List<UserSkill> Users { get; set; }
     }
 }

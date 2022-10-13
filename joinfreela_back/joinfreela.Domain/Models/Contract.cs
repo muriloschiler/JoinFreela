@@ -6,10 +6,8 @@ namespace joinfreela.Domain.Models
     public class Contract: Register
     {
         public int JobId { get; set; }
-        public Job Project { get; set; }
+        public Job Job { get; set; }
         public int FreelancerId { get; set; }
         public Freelancer Freelancer { get; set; }
-        public int OwnerId { get; set; }
-        public Owner Owner { get; set; }
     }
 }
