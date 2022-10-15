@@ -1,20 +1,79 @@
 {
   "format": 1,
   "restore": {
-    "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj": {}
+    "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Application\\joinfreela.Application.csproj": {}
   },
   "projects": {
-    "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj": {
+    "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Application\\joinfreela.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj",
+        "projectUniqueName": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Application\\joinfreela.Application.csproj",
         "projectName": "joinfreela.Application",
-        "projectPath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj",
-        "packagesPath": "/home/user/.nuget/packages/",
-        "outputPath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/obj/",
+        "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Application\\joinfreela.Application.csproj",
+        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+        "outputPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/user/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj": {
+                "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj"
+              },
+              "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Infrastructure\\joinfreela.Infrastructure.csproj": {
+                "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Infrastructure\\joinfreela.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj",
+        "projectName": "joinfreela.Domain",
+        "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj",
+        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+        "outputPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -52,7 +111,69 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Infrastructure\\joinfreela.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Infrastructure\\joinfreela.Infrastructure.csproj",
+        "projectName": "joinfreela.Infrastructure",
+        "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Infrastructure\\joinfreela.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+        "outputPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj": {
+                "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

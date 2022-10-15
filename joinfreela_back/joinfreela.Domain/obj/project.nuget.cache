@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MeT6H7wF96B0uO99wis564tylENcEiUJ4ESUzirjs3FDYRXwHp4dO1ZHMF6TDRZNqCfWSEgeKfEJJdzREXHv7A==",
+  "dgSpecHash": "5o37mOpzjp2gimXFxlNNG2XEQfackiOdEeYGHF6VpUE8l4I1/0nfTWhToI4W6R/8vY5yfYIqk4AxBvUFgrXdgw==",
   "success": true,
-  "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Domain/joinfreela.Domain.csproj",
+  "projectFilePath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
