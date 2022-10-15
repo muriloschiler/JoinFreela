@@ -7,7 +7,6 @@ namespace joinfreela.Application.DTOs.Project
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int OwnerId { get; set; }
         public IEnumerable<JobRequest> Jobs { get; set; }
     }
 }

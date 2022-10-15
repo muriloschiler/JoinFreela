@@ -9,8 +9,6 @@ namespace joinfreela.Application.DTOs.Job
         public int Description { get; set; }
         public decimal Salary { get; set; }
         public int SeniorityId { get; set; }
-        public int ProjectId { get; set; }
-        public IEnumerable<NominationRequest> Nominations { get; set; }
-        
+        public int ProjectId { get; set; }   
     }
 }

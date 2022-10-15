@@ -17,7 +17,7 @@ namespace joinfreela.Infrastructure.Data.Configurations.ManyToManyConfigurations
 
             builder
                 .HasOne(us=>us.Skill)
-                .WithMany(sk=>sk.Users)
+                .WithMany(sk=>sk.Freelancers)
                 .HasForeignKey(us=>us.SkillId);
         }
     }

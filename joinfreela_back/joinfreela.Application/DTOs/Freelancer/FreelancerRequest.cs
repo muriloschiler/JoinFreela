@@ -9,6 +9,5 @@ namespace joinfreela.Application.DTOs.Freelancer
     {
         public IEnumerable<SkillRequest> Skills  { get; set; }
         public IEnumerable<NominationRequest> Nominations { get; set; }
-        public IEnumerable<ContractRequest> Contracts { get; set; }
     }
 }

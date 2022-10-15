@@ -1,5 +1,4 @@
 using joinfreela.Domain.Classes.Base;
-using joinfreela.Domain.Models;
 using joinfreela.Domain.Models.Enumerations;
 
 namespace joinfreela.Domain.Models
