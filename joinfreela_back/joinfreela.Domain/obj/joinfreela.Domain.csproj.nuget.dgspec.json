@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj": {}
+    "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Domain/joinfreela.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj": {
+    "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Domain/joinfreela.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj",
+        "projectUniqueName": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Domain/joinfreela.Domain.csproj",
         "projectName": "joinfreela.Domain",
-        "projectPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\joinfreela.Domain.csproj",
-        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-        "outputPath": "D:\\Murilo\\Projects\\Dotnet_Projects\\JoinFreela\\joinfreela_back\\joinfreela.Domain\\obj\\",
+        "projectPath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Domain/joinfreela.Domain.csproj",
+        "packagesPath": "/home/user/.nuget/packages/",
+        "outputPath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/user/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
         }
       }
     }

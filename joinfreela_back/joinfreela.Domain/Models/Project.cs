@@ -9,7 +9,7 @@ namespace joinfreela.Domain.Models
         public string Description { get; set; }
         public int OwnerId { get; set; }
         public Owner Owner { get; set; }
-        public List<Job> Jobs { get; set; }
+        public IEnumerable<Job> Jobs { get; set; }
         
     }
 }   

@@ -13,7 +13,7 @@ namespace joinfreela.Domain.Models
         public Seniority Seniority { get; set; }
         public int ProjectId { get; set; }
         public  Project Project { get; set; }
-        public List<Nomination> Nominations { get; set; }
         public Contract Contract { get; set; }       
+        public IEnumerable<Nomination> Nominations { get; set; }
     }
 }
