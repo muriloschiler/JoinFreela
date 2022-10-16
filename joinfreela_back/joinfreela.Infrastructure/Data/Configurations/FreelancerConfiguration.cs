@@ -16,11 +16,6 @@ namespace joinfreela.Infrastructure.Data.Configurations
                 .HasForeignKey(co=>co.FreelancerId)
                 .IsRequired();
             
-            builder
-                .HasOne(fr=>fr.UserRole)
-                .WithMany()
-                .HasForeignKey(fr=>fr.UserRoleId)
-                .IsRequired();
         }
     }
 }

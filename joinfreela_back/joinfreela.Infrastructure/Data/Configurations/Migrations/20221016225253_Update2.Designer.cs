@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using joinfreela.Infrastructure.Data;
 
@@ -10,9 +11,10 @@ using joinfreela.Infrastructure.Data;
 namespace joinfreela.Infrastructure.Migrations
 {
     [DbContext(typeof(JoinFreelaDbContext))]
-    partial class JoinFreelaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221016225253_Update2")]
+    partial class Update2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
@@ -115,7 +117,7 @@ namespace joinfreela.Infrastructure.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("Varchar(30)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -123,7 +125,7 @@ namespace joinfreela.Infrastructure.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("Varchar(30)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("Date");
@@ -218,7 +220,7 @@ namespace joinfreela.Infrastructure.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("Varchar(30)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -226,7 +228,7 @@ namespace joinfreela.Infrastructure.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("Varchar(30)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("Date");

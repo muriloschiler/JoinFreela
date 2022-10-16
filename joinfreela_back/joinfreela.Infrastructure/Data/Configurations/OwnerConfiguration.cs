@@ -18,12 +18,6 @@ namespace joinfreela.Infrastructure.Data.Configurations
                 .HasForeignKey(po=>po.OwnerId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder
-                .HasOne(ow=>ow.UserRole)
-                .WithMany()
-                .HasForeignKey(ow=>ow.UserRoleId)
-                .IsRequired();
         }
     }
 }
