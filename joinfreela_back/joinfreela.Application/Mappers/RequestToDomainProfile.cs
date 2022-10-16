@@ -24,6 +24,7 @@ namespace joinfreela.Application.Mappers
             CreateMap<FreelancerRequest,Freelancer>();
             CreateMap<SeniorityViewModel,Seniority>();
             
+            //Require AuthServiceLoggedUser
             //CreateMap<NominationRequest,Nomination>();
             //CreateMap<SkillRequest,UserSkill>();
         }

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "AutoMapper/11.0.0": {
+      "AutoMapper/11.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0"
@@ -569,6 +569,21 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "joinfreela.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "joinfreela.Domain": "1.0.0",
+          "joinfreela.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/joinfreela.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/joinfreela.Application.dll": {}
+        }
+      },
       "joinfreela.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -596,15 +611,15 @@
     }
   },
   "libraries": {
-    "AutoMapper/11.0.0": {
-      "sha512": "+596AnKykYCk9RxXCEF4GYuapSebQtFVvIA1oVG1rrRkCLAC7AkWehJ0brCfYUbdDW3v1H/p0W3hob7JoXGjMw==",
+    "AutoMapper/11.0.1": {
+      "sha512": "WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
       "type": "package",
-      "path": "automapper/11.0.0",
+      "path": "automapper/11.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "automapper.11.0.0.nupkg.sha512",
+        "automapper.11.0.1.nupkg.sha512",
         "automapper.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.dll",
@@ -1477,6 +1492,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "joinfreela.Application/1.0.0": {
+      "type": "project",
+      "path": "../joinfreela.Application/joinfreela.Application.csproj",
+      "msbuildProject": "../joinfreela.Application/joinfreela.Application.csproj"
+    },
     "joinfreela.Domain/1.0.0": {
       "type": "project",
       "path": "../joinfreela.Domain/joinfreela.Domain.csproj",
@@ -1493,6 +1513,7 @@
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.10",
       "Swashbuckle.AspNetCore >= 6.2.3",
+      "joinfreela.Application >= 1.0.0",
       "joinfreela.Infrastructure >= 1.0.0"
     ]
   },
@@ -1521,6 +1542,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj": {
+              "projectPath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj"
+            },
             "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Infrastructure/joinfreela.Infrastructure.csproj": {
               "projectPath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Infrastructure/joinfreela.Infrastructure.csproj"
             }

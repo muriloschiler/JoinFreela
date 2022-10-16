@@ -28,7 +28,10 @@ namespace joinfreela.Infrastructure.Data
 
             modelBuilder
                 .Entity<Seniority>()
-                .HasData(Enumeration.GetAll<Seniority>());    
+                .HasData(Enumeration.GetAll<Seniority>());
+            modelBuilder
+                .Entity<UserRole>()
+                .HasData(Enumeration.GetAll<UserRole>());      
         }
     }
 }

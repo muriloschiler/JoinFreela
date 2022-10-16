@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2MEPLOcy5YYZxP/aecQCCyHWEJPFb/iJ6n2oQ3RcRVOMIr1exxurcWpYEMY7RfQbA2B4ZSIz4MbInO+7KlsM3g==",
+  "dgSpecHash": "C79vc83CX7kWDA3rG0WCimJ6zHrIwXEX+ndx/CLwUDatOiOGFyeVrm22/8nE15X0kIs7TQ28kJDBtWK/7F2pvA==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.API/joinfreela.API.csproj",
   "expectedPackageFiles": [
-    "/home/user/.nuget/packages/automapper/11.0.0/automapper.11.0.0.nupkg.sha512",
+    "/home/user/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/user/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "/home/user/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
