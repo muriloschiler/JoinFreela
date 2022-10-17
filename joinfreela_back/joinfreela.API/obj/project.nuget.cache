@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "M6C0B4Ik2MqikXNi4rZVewZYDetQxmITnxb80J7zAvHnLSHB8gwb8kbiBf1FR0C1daW0LHQqD7+6cdQ1T5Ts4w==",
+  "dgSpecHash": "Sn05PkXOx8e6QOMA7Ve7d/H4Kcb7spu4HC9peRLnnA9pa1YN5lmlYH97pSa+HDgDRzgNe187u8boARZNb4lFUA==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.API/joinfreela.API.csproj",
   "expectedPackageFiles": [
     "/home/user/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/user/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "/home/user/.nuget/packages/fluentvalidation/11.2.2/fluentvalidation.11.2.2.nupkg.sha512",
+    "/home/user/.nuget/packages/fluentvalidation.aspnetcore/11.2.2/fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "/home/user/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.2.1/fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "/home/user/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.10/microsoft.aspnetcore.authentication.jwtbearer.6.0.10.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

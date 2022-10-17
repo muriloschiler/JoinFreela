@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "RsrfBOI52DMtR9PFqR4YsJBaowBnoz1udsLCRIK5VgH4uFl6zIFIow5NkXwBAJko8wBIwqjo6PfVT2E7pBDapg==",
+  "dgSpecHash": "i+1Jxc4u4aqqk+zGEoKV2DlL6ilVlLnmAmz2xNw+B5ZieP9zwXD3IKWAHPKfa2kB5Nn5pd79O+Itle8RHc+rCg==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj",
   "expectedPackageFiles": [
     "/home/user/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
+    "/home/user/.nuget/packages/fluentvalidation/11.2.2/fluentvalidation.11.2.2.nupkg.sha512",
+    "/home/user/.nuget/packages/fluentvalidation.aspnetcore/11.2.2/fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "/home/user/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.2.1/fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",

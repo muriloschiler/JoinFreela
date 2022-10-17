@@ -1,9 +1,9 @@
+using System.Reflection;
+using FluentValidation.AspNetCore;
 using joinfreela.Application.Interfaces.Services;
-using joinfreela.Application.Mappers;
 using joinfreela.Application.Services;
+using joinfreela.Application.Utils;
 using joinfreela.Domain.Interfaces.Repositories;
-using joinfreela.Domain.Interfaces.Repositories.Base;
-using joinfreela.Domain.Models;
 using joinfreela.Infrastructure.Data;
 using joinfreela.Infrastructure.Repositories;
 
@@ -19,6 +19,14 @@ namespace joinfreela.API.Configuration
             services.AddScoped<IProjectRepository,ProjectRepository>();
             services.AddScoped<SkillRepository,SkillRepository>();
             services.AddScoped<IContractRepository,ContractRepository>();
+
+            services.AddFluentValidation(fv =>
+            {
+                fv.AutomaticValidationEnabled = false;
+                fv.RegisterValidatorsFromAssemblyContaining<OwnerRequestValidator>(
+                    asr => !(asr.ValidatorType.GetCustomAttribute<IgnoreInjectionAttribute>()?.Ignore ?? false)
+                );
+            });
 
             return services;     
         }
