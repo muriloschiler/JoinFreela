@@ -7,6 +7,7 @@ using joinfreela.Application.DTOs.Nomination;
 using joinfreela.Application.DTOs.Owner;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.DTOs.Skill;
+using joinfreela.Application.Interfaces.Services;
 using joinfreela.Domain.Models;
 using joinfreela.Domain.Models.Enumerations;
 
@@ -14,7 +15,7 @@ namespace joinfreela.Application.Mappers
 {
     public class RequestToDomainProfile : Profile
     {
-        public RequestToDomainProfile()
+        public RequestToDomainProfile(IAuthService _authService)
         {
             CreateMap<ContractRequest,Contract>();
             CreateMap<JobRequest,Job>();
@@ -24,9 +25,11 @@ namespace joinfreela.Application.Mappers
             CreateMap<FreelancerRequest,Freelancer>();
             CreateMap<SeniorityViewModel,Seniority>();
             
-            //Require AuthServiceLoggedUser
-            //CreateMap<NominationRequest,Nomination>();
-            //CreateMap<SkillRequest,UserSkill>();
-        }
+            CreateMap<NominationRequest,Nomination>()
+                .ForMember(no=>no.FreelancerId, m=>m.MapFrom(req=> _authService.AuthUser.Id));
+            
+            CreateMap<SkillRequest,UserSkill>()
+                .ForMember(usk=>usk.FreelancerId,m=>m.MapFrom(req=> _authService.AuthUser.Id));
+        }       
     }
 }
