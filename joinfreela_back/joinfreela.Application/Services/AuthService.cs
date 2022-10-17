@@ -6,7 +6,10 @@ using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Options;
 using joinfreela.Domain.Classes.Base;
 using joinfreela.Domain.Interfaces.Repositories;
+using joinfreela.Domain.Models.Auth;
+using joinfreela.Domain.Models.Base;
 using joinfreela.Domain.Models.Enumerations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -17,17 +20,35 @@ namespace joinfreela.Application.Services
     {
         public IFreelancerRepository _freelancerRepository { get; set; }
         public IOwnerRepository _ownerRepository { get; set; }
-        private readonly JWTOptions _jwtOptions;    
+        private readonly JWTOptions _jwtOptions; 
+        public AuthUser AuthUser { get; set; }
+           
         public AuthService
         (   IFreelancerRepository freelancerRepository, 
             IOwnerRepository ownerRepository,
-            IOptions<JWTOptions> jwtOptions )
+            IOptions<JWTOptions> jwtOptions,
+            IHttpContextAccessor httpContextAccessor = null )
         {
             _freelancerRepository = freelancerRepository;
             _ownerRepository = ownerRepository;
             _jwtOptions = jwtOptions.Value;
-
+            if(httpContextAccessor is not null)
+                SetLoggedUser(httpContextAccessor.HttpContext.User);
         }
+
+        private void SetLoggedUser(ClaimsPrincipal user)
+        {
+            if (user.Identity.IsAuthenticated)
+            {
+                AuthUser = new AuthUser{
+                    Id = int.Parse(user.Claims.FirstOrDefault(cl=>cl.Type==ClaimTypes.Sid).Value),
+                    Email = user.Claims.FirstOrDefault(cl=>cl.Type==ClaimTypes.Email).ToString(),
+                    Name = user.Claims.FirstOrDefault(cl=>cl.Type==ClaimTypes.Name).ToString(),
+                    Role = user.Claims.FirstOrDefault(cl=>cl.Type==ClaimTypes.Role).ToString(),
+                };
+            }
+        }
+
         public async Task<IEnumerable<Claim>> LoginAsync(LoginRequest loginRequest)
         {    
             User user = null;

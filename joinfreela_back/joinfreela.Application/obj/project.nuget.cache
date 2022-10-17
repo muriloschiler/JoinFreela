@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "eMBhRdVd6q30wqxabG9valn85unW/htE1OyV4WwmsZkYFRsz5PHQpg5AAih01r0C6bHQbbFVpiAWN8r0sJJIUQ==",
+  "dgSpecHash": "RsrfBOI52DMtR9PFqR4YsJBaowBnoz1udsLCRIK5VgH4uFl6zIFIow5NkXwBAJko8wBIwqjo6PfVT2E7pBDapg==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj",
   "expectedPackageFiles": [
     "/home/user/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.data.sqlite.core/6.0.10/microsoft.data.sqlite.core.6.0.10.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.entityframeworkcore/6.0.10/microsoft.entityframeworkcore.6.0.10.nupkg.sha512",

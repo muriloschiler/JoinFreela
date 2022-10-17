@@ -13,7 +13,6 @@ namespace joinfreela.API.Configuration
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services){
             services.AddDbContext<JoinFreelaDbContext>();
-            services.AddAutoMapper(typeof(RequestToDomainProfile),typeof(DomainToResponseProfile));
             services.AddScoped<IAuthService,AuthService>();
             services.AddScoped<IOwnerRepository,OwnerRepository>();
             services.AddScoped<IFreelancerRepository,FreelancerRepository>();

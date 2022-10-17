@@ -1,4 +1,5 @@
 using joinfreela.API.Configuration;
+using joinfreela.Application.Mappers;
 using joinfreela.Application.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,4 +28,7 @@ void ConfigureConfiguration(IServiceCollection services,ConfigurationManager con
 void ConfigureServices(IServiceCollection services, ConfigurationManager configuration){
     services.AddDependencyInjection();
     services.AddAuthConfiguration(configuration);
+    
+    services.AddHttpContextAccessor();
+    services.AddAutoMapper(typeof(RequestToDomainProfile),typeof(DomainToResponseProfile));
 }
