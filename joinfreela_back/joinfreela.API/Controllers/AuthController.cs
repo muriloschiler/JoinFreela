@@ -20,8 +20,8 @@ namespace joinfreela.API.Controllers
         public async Task<ActionResult<JWTResponse>> Login([FromBody] LoginRequest loginRequest)
         {
             IEnumerable<Claim> claims = await _authService.LoginAsync(loginRequest);
-            //JWTResponse jwtResponse = _authService.GenerateJWT(claims);
-            return Ok("jwtResponse");
+            JWTResponse jwtResponse = _authService.GenerateJWT(claims);
+            return Ok(jwtResponse);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace joinfreela.API.Configuration
             services.AddDbContext<JoinFreelaDbContext>();
             services.AddAutoMapper(typeof(RequestToDomainProfile),typeof(DomainToResponseProfile));
             services.AddScoped<IAuthService,AuthService>();
-            services.AddScoped<IUserRepository<Owner>,OwnerRepository>();
-            services.AddScoped<IUserRepository<Freelancer>,FreelancerRepository>();
+            services.AddScoped<IOwnerRepository,OwnerRepository>();
+            services.AddScoped<IFreelancerRepository,FreelancerRepository>();
             services.AddScoped<IProjectRepository,ProjectRepository>();
             services.AddScoped<SkillRepository,SkillRepository>();
             services.AddScoped<IContractRepository,ContractRepository>();

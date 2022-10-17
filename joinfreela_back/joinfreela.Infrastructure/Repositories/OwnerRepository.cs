@@ -6,7 +6,7 @@ using joinfreela.Infrastructure.Repositories.Base;
 
 namespace joinfreela.Infrastructure.Repositories
 {
-    public class OwnerRepository : UserRepository<Owner>, IUserRepository<Owner>
+    public class OwnerRepository : BaseRepository<Owner>, IOwnerRepository
     {
         public OwnerRepository(JoinFreelaDbContext joinFreelaDbContext) : base(joinFreelaDbContext)
         {}
