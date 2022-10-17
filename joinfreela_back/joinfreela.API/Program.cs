@@ -26,4 +26,5 @@ void ConfigureConfiguration(IServiceCollection services,ConfigurationManager con
 
 void ConfigureServices(IServiceCollection services, ConfigurationManager configuration){
     services.AddDependencyInjection();
+    services.AddAuthConfiguration(configuration);
 }

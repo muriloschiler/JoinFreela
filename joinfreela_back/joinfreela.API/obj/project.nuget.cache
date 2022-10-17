@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "H4ie+nCn5eAQau6kxysvzSaFLlvceFpKvct+0X3jlRJRXqCtdJhSRtu4ESYIrEsPIvZPIgcITfSidBru/s/+yQ==",
+  "dgSpecHash": "/02etbxgTjoOF62j7aOskVOxOUF2Dzhv25k1STLWA0WIcKM2t4nOVoJKQkHDM6AhP2BRrnwuRsZHyyTmEw37yA==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.API/joinfreela.API.csproj",
   "expectedPackageFiles": [
     "/home/user/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/user/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "/home/user/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.10/microsoft.aspnetcore.authentication.jwtbearer.6.0.10.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.data.sqlite.core/6.0.10/microsoft.data.sqlite.core.6.0.10.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.entityframeworkcore/6.0.10/microsoft.entityframeworkcore.6.0.10.nupkg.sha512",
@@ -30,6 +31,8 @@
     "/home/user/.nuget/packages/microsoft.identitymodel.abstractions/6.24.0/microsoft.identitymodel.abstractions.6.24.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.24.0/microsoft.identitymodel.jsonwebtokens.6.24.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.identitymodel.logging/6.24.0/microsoft.identitymodel.logging.6.24.0.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.identitymodel.protocols/6.10.0/microsoft.identitymodel.protocols.6.10.0.nupkg.sha512",
+    "/home/user/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.10.0/microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.identitymodel.tokens/6.24.0/microsoft.identitymodel.tokens.6.24.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
