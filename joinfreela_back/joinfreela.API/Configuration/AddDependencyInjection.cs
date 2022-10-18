@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Services;
 using joinfreela.Application.Utils;
+using joinfreela.Application.Validators;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Infrastructure.Data;
 using joinfreela.Infrastructure.Repositories;

@@ -12,6 +12,10 @@ namespace joinfreela.Infrastructure.Data.Configurations
             builder
                 .HasOne(co=>co.Job)
                 .WithOne(jo=>jo.Contract);
+            
+            builder
+                .HasOne(co=>co.Freelancer)
+                .WithMany(fr=>fr.Contracts);
         }
     }
 }

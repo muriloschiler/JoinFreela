@@ -13,7 +13,10 @@ namespace joinfreela.Infrastructure.Data.Configurations.Base
             builder.Property(us=>us.Username).HasColumnType("Varchar(30)").IsRequired();
             builder.Property(us=>us.Email).HasColumnType("Varchar(30)").IsRequired();
             builder.Property(us=>us.Password).HasColumnType("Varchar(30)").IsRequired();
-            
+            builder.Property(us=>us.Active)
+                .HasColumnType("Integer")
+                .HasDefaultValue(0);
+
             builder
                 .HasOne(us=>us.UserRole)
                 .WithMany()

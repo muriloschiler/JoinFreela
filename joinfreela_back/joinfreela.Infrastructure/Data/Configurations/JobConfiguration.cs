@@ -12,7 +12,10 @@ namespace joinfreela.Infrastructure.Data.Configurations
             builder.Property(jo=>jo.Title).HasColumnType("Varchar(30)").IsRequired();
             builder.Property(jo=>jo.Description).HasColumnType("Varchar(1000)");
             builder.Property(jo=>jo.Salary).HasColumnType("Real");
-            
+            builder.Property(jo=>jo.Open)
+                .HasColumnType("Integer")
+                .HasDefaultValue(0);
+
             builder
                 .HasOne(jo=>jo.Seniority)
                 .WithMany()
