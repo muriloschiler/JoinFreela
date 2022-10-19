@@ -15,6 +15,7 @@ namespace joinfreela.API.Configuration
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services){
             services.AddDbContext<JoinFreelaDbContext>();
             services.AddScoped<IAuthService,AuthService>();
+            services.AddScoped<ISkillService,SkillService>();
             services.AddScoped<IOwnerRepository,OwnerRepository>();
             services.AddScoped<IFreelancerRepository,FreelancerRepository>();
             services.AddScoped<IProjectRepository,ProjectRepository>();
