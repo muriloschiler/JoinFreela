@@ -4,5 +4,6 @@ namespace joinfreela.Application.Constants
     {
         public const string Freelancer = "Freelancer"; 
         public const string Owner = "Owner";
+        public const string Admin="Admin";
     }
 }

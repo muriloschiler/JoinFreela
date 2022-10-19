@@ -1,31 +1,21 @@
 using AutoMapper;
-using joinfreela.Application.DTOs.Api;
+using FluentValidation;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Application.Interfaces.Services;
-using joinfreela.Application.Parameters;
+using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
+using joinfreela.Domain.Interfaces.UnitOfWork;
+using joinfreela.Domain.Models;
 
 namespace joinfreela.Application.Services
 {
-    public class SkillService : ISkillService
+    public class SkillService : BaseService<Skill,SkillRequest,SkillResponse>, ISkillService
     {
-        public ISkillRepository _skillRepository { get; set; }
-        public IMapper _mapper { get; set; }
+        
 
-        public SkillService(ISkillRepository skillRepository, IMapper mapper)
-        {
-            _skillRepository = skillRepository;
-            _mapper = mapper;
-        }
+        public SkillService(ISkillRepository _skillRepository, IMapper _mapper, IValidator<SkillRequest> _skillRequestvalidator, IUnityOfWork _unityOfWork)
+        :base(_skillRepository,_mapper,_skillRequestvalidator,_unityOfWork)
+        {}
 
-        public async Task<PaginationResponse<SkillResponse>> GetAsync(SkillParameters skillParameters)
-        {
-            return new PaginationResponse<SkillResponse>
-                {
-                    Skip = skillParameters.Skip,
-                    Take = skillParameters.Take,
-                    Data = _mapper.Map<IEnumerable<SkillResponse>>(await _skillRepository.GetAsync(skillParameters.Skip,skillParameters.Take,skillParameters.Filter()))
-                };
-        }
     }
 }
