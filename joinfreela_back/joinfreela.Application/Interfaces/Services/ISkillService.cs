@@ -8,8 +8,10 @@ namespace joinfreela.Application.Interfaces.Services
 {
     public interface ISkillService
     {
-        public Task<PaginationResponse<SkillResponse>> GetAsync(BaseParameters<Skill> skillParameters);
-        Task<SkillResponse> RegisterAsync(SkillRequest skillRequest);
-        Task<SkillResponse> UpdateAsync(int id,SkillRequest skillRequest);
+        public Task<PaginationResponse<SkillResponse>> GetAsync(SkillParameters baseParameters);
+        public Task<SkillResponse> GetById(int id);
+        public Task<SkillResponse> RegisterAsync(SkillRequest skillRequest);
+        public Task<SkillResponse> UpdateAsync(int id,SkillRequest skillRequest);
+        public Task<SkillResponse> DeleteAsync(int id);
     }
 }

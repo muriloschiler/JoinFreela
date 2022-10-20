@@ -10,9 +10,10 @@ namespace joinfreela.Application.Interfaces.Services.Base
     where Trequest: RegisterViewModel
     where Tresponse: RegisterViewModel
     {
-        public Task<PaginationResponse<Tresponse>> GetAsync(BaseParameters<Tmodel> parameters);    
+        public Task<Tresponse> GetById(int id);
         public Task<Tresponse> RegisterAsync(Trequest request);
         public Task<Tresponse> UpdateAsync(int id,Trequest request);
+        public Task<Tresponse> DeleteAsync(int id);
     }
 
 }

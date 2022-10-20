@@ -31,52 +31,60 @@ namespace joinfreela.Application.Services.Base
             
         }
 
-        public virtual async Task<PaginationResponse<Tresponse>> GetAsync(BaseParameters<Tmodel> parameters)
+        public virtual async Task<Tresponse> GetById(int id)
         {
-            var page= new PaginationResponse<Tresponse>
-                {
-                    Skip = parameters.Skip,
-                    Take = parameters.Take,
-                    Data = _mapper.Map<IEnumerable<Tresponse>>(await _repository.GetAsync(parameters.Skip,parameters.Take,parameters.Filter()))
-                };
-            //Interaction
-            await _unityOfWork.CommitChangesAsync();
-            return page;
-        }
-
-        public virtual async Task<Tresponse> RegisterAsync(Trequest request)
-        {
-            var validationResult = _requestvalidator.Validate(request);
-            if( ! validationResult.IsValid)
-                throw new BadRequestException(validationResult);
-
-            var model = _mapper.Map<Tmodel>(request);            
-            await _repository.RegisterAsync(model);
+            var model = await _repository.GetByIdAsync(id);
+            if (model is null)
+                throw new NotFoundException($"{nameof(Tmodel)} não existe");
+            
             //Interaction
             await _unityOfWork.CommitChangesAsync();
             return _mapper.Map<Tresponse>(model);
         }
 
-        public virtual async Task<Tresponse> UpdateAsync(int id,Trequest request)
+        public async Task<Tresponse> RegisterAsync(Trequest request)
+        {
+            var validationResult = await _requestvalidator.ValidateAsync(request);
+            if( ! validationResult.IsValid)
+                throw new BadRequestException(validationResult);
+            
+            var model = _mapper.Map<Tmodel>(request);
+            await _repository.RegisterAsync(model);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            return _mapper.Map<Tresponse>(model);
+        } 
+
+
+        public async Task<Tresponse> UpdateAsync(int id, Trequest request)
+        {
+            var validationResult = await _requestvalidator.ValidateAsync(request);
+            if( ! validationResult.IsValid)
+                throw new BadRequestException(validationResult);
+
+            if(id != request.Id)
+                throw new BadRequestException("Os id's presentes na rota e na request são diferentes");
+        
+            var model = await _repository.GetByIdAsync(id);
+            if (model is null)
+                throw new NotFoundException($"{nameof(Tmodel)} não existe");
+
+            _mapper.Map<Trequest,Tmodel>(request,model);
+            await _repository.UpdateAsync(model);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            return _mapper.Map<Tresponse>(model);
+        }
+
+        public virtual async Task<Tresponse> DeleteAsync(int id)
         {
             var model = await _repository.GetByIdAsync(id);
             if (model is null)
-                throw new NotFoundException($"{nameof(Tmodel)} não encontrada");
-            
-            if(model.Id != request.Id)
-                throw new BadRequestException($"{nameof(Tmodel)}Request.Id","Id's informados não são condizentes");
-                                
-            var validationResult = _requestvalidator.Validate(request);
-            if ( ! validationResult.IsValid)
-                throw new BadRequestException(validationResult);
-
-            _mapper.Map<Trequest,Tmodel>(request,model);
-            
+                throw new NotFoundException($"{nameof(Tmodel)} não existe");
+            await _repository.DeleteAsync(model);
             //Interaction
-            await _repository.UpdateAsync(model);
             await _unityOfWork.CommitChangesAsync();
-            return _mapper.Map<Tresponse>(model);    
-            
+            return _mapper.Map<Tresponse>(model);
         }
 
     }
