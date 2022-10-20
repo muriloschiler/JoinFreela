@@ -55,5 +55,9 @@ namespace joinfreela.Infrastructure.Repositories.Base
             return Task.FromResult(entity);
         }
 
+        public async Task<int> Count(Expression<Func<T,bool>>filter)
+        {
+            return await Task.FromResult(Query().Where(filter).Count());
+        }
     }
 }

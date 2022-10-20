@@ -14,13 +14,26 @@ namespace joinfreela.Application.Services
 {
     public class SkillService : BaseService<Skill,SkillRequest,SkillResponse>, ISkillService
     {
-        public SkillService(ISkillRepository _skillRepository, IMapper _mapper, IValidator<SkillRequest> _skillRequestvalidator, IUnityOfWork _unityOfWork)
-        :base(_skillRepository,_mapper,_skillRequestvalidator,_unityOfWork)
-        {}
-
-        public Task<PaginationResponse<SkillResponse>> GetAsync( SkillParameters baseParameters)
+        public ISkillRepository _skillRepository { get; set; }
+        public IMapper _mapper { get; set; }
+        public IUnityOfWork _unityOfWork { get; set; }
+        public SkillService(ISkillRepository skillRepository, IMapper mapper, IValidator<SkillRequest> _skillRequestvalidator, IUnityOfWork unityOfWork)
+        :base(skillRepository,mapper,_skillRequestvalidator,unityOfWork)
         {
-            throw new NotImplementedException();
+            _skillRepository=skillRepository;
+            _mapper = mapper;
+            _unityOfWork = unityOfWork;
+        }
+
+        public async Task<PaginationResponse<SkillResponse>> GetAsync( SkillParameters skillParameters)
+        {
+
+            return new PaginationResponse<SkillResponse>{
+                Take = skillParameters.Take,
+                Skip = skillParameters.Skip,
+                Count = await _skillRepository.Count(skillParameters.Filter()), 
+                Data = _mapper.Map<IEnumerable<SkillResponse>>(await _skillRepository.GetAsync(skillParameters.Skip,skillParameters.Take,skillParameters.Filter()))
+            };
         }
     }
 }

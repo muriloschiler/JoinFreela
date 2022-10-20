@@ -24,6 +24,7 @@ namespace joinfreela.API.Configuration
             services.AddScoped<IContractRepository,ContractRepository>();
             services.AddScoped<IAuthService,AuthService>();
             services.AddScoped<ISkillService,SkillService>();
+            services.AddScoped<IProjectService,ProjectService>();
 
             services.AddFluentValidation(fv =>
             {

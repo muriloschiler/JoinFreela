@@ -40,5 +40,11 @@ namespace joinfreela.API.Controllers
             var skillResponse = await _skillService.UpdateAsync(id,skillRequest);
             return Ok(skillResponse);
         }
+
+        [HttpDelete("id:int")]
+        public async Task<ActionResult<SkillResponse>> DeleteAsync(int id)
+        {
+            return Ok(await _skillService.DeleteAsync(id));
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace joinfreela.Application.Services.Base
             return _mapper.Map<Tresponse>(model);
         }
 
-        public async Task<Tresponse> RegisterAsync(Trequest request)
+        public virtual async Task<Tresponse> RegisterAsync(Trequest request)
         {
             var validationResult = await _requestvalidator.ValidateAsync(request);
             if( ! validationResult.IsValid)
@@ -56,7 +56,7 @@ namespace joinfreela.Application.Services.Base
         } 
 
 
-        public async Task<Tresponse> UpdateAsync(int id, Trequest request)
+        public virtual async Task<Tresponse> UpdateAsync(int id, Trequest request)
         {
             var validationResult = await _requestvalidator.ValidateAsync(request);
             if( ! validationResult.IsValid)

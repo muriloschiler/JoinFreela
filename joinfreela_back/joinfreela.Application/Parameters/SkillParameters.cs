@@ -15,9 +15,8 @@ namespace joinfreela.Application.Parameters
             ExpressionStarter<Skill> predicate = PredicateBuilder.New<Skill>(true);
 
             if( !String.IsNullOrEmpty(Name))
-            {
                 predicate.And(sk => EF.Functions.Like(sk.Name,Name));
-            } 
+            
             return predicate;
         }
     }
