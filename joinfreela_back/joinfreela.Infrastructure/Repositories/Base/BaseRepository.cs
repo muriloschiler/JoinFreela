@@ -24,7 +24,10 @@ namespace joinfreela.Infrastructure.Repositories.Base
         {
             return _query;
         }
-
+        public void AddPreQuery(Func<IQueryable<T>,IQueryable<T>> preQuery)
+        {
+            _query = preQuery.Invoke(_query);
+        }
         public async Task<IEnumerable<T>> GetAsync(int skip,int take, Expression<Func<T,bool>> filter = null)
         {
             return await Query().Where(filter).Skip(skip).Take(take).ToListAsync();

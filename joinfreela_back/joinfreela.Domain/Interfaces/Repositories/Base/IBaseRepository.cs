@@ -7,6 +7,7 @@ namespace joinfreela.Domain.Interfaces.Repositories.Base
     where T:Register
     {
         IQueryable<T> Query();
+        void AddPreQuery(Func<IQueryable<T>,IQueryable<T>> preQuery);
         Task<IEnumerable<T>> GetAsync(int skip,int take, Expression<Func<T,bool>> filter = null);
         Task<T> GetByIdAsync(int id);
         Task<T> RegisterAsync(T entity);

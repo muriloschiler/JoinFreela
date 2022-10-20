@@ -1,6 +1,6 @@
 using joinfreela.Application.DTOs.Common;namespace joinfreela.Application.DTOs.Job
 {
-    public class JobRequest:RegisterViewModel
+    public class JobRequest : RegisterViewModel
     {
         public string Title { get; set; }
         public string Description { get; set; }

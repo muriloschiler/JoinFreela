@@ -1,5 +1,6 @@
 using joinfreela.Application.Constants;
 using joinfreela.Application.DTOs.Api;
+using joinfreela.Application.DTOs.Job;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Parameters;
@@ -44,6 +45,13 @@ namespace joinfreela.API.Controllers
         public async Task<ActionResult<ProjectResponse>> DeleteAsync(int id)
         {
             return Ok(await _projectService.DeleteAsync(id));
+        }
+    
+        [HttpPost("{projectId:int}/job")]
+        public async Task<IActionResult> RegisterJobAsync(int projectId,[FromBody] JobRequest request)
+        {
+            await _projectService.AddJobAsync(projectId,request);
+            return NoContent();
         }
     }
 }
