@@ -10,7 +10,7 @@ namespace joinfreela.API.Controllers
 {
     [Route("api/v1/admin/[controller]")]
     [ApiController]
-    [Authorize(Roles = UserRoles.Admin)]
+    //[Authorize(Roles = UserRoles.Admin)]
     public class SkillController:ControllerBase
     {
         public ISkillService _skillService { get; set; }
@@ -26,6 +26,11 @@ namespace joinfreela.API.Controllers
            var page = await  _skillService.GetAsync(skillParameters);
            return Ok(page);
         }  
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<SkillResponse>> GetById(int id)
+        {
+            return Ok(await _skillService.GetById(id));
+        }
 
         [HttpPost]
         public async Task<ActionResult<SkillResponse>> RegisterAsync([FromBody] SkillRequest skillRequest)
@@ -34,14 +39,14 @@ namespace joinfreela.API.Controllers
             return Ok(skillResponse);
         }
 
-        [HttpPut("id:int")]
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<SkillResponse>> UpdateAsync(int id,[FromBody] SkillRequest skillRequest)
         {
             var skillResponse = await _skillService.UpdateAsync(id,skillRequest);
             return Ok(skillResponse);
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<SkillResponse>> DeleteAsync(int id)
         {
             return Ok(await _skillService.DeleteAsync(id));

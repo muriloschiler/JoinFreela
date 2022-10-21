@@ -8,7 +8,7 @@ namespace joinfreela.Application.Parameters
 {
     public class SkillParameters: BaseParameters<Skill>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         
         public override Expression<Func<Skill,bool>> Filter()
         {

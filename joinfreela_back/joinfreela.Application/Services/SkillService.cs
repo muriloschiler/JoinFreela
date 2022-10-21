@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation;
 using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Skill;
+using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Parameters;
 using joinfreela.Application.Parameters.Base;
@@ -17,17 +18,18 @@ namespace joinfreela.Application.Services
         public ISkillRepository _skillRepository { get; set; }
         public IMapper _mapper { get; set; }
         public IUnityOfWork _unityOfWork { get; set; }
-        public SkillService(ISkillRepository skillRepository, IMapper mapper, IValidator<SkillRequest> _skillRequestvalidator, IUnityOfWork unityOfWork)
-        :base(skillRepository,mapper,_skillRequestvalidator,unityOfWork)
+        public IValidator<SkillRequest> _skillRequestvalidator { get; set; }
+        public SkillService(ISkillRepository skillRepository, IMapper mapper, IValidator<SkillRequest> skillRequestvalidator, IUnityOfWork unityOfWork)
+        :base(skillRepository,mapper,skillRequestvalidator,unityOfWork)
         {
             _skillRepository=skillRepository;
             _mapper = mapper;
+            _skillRequestvalidator = skillRequestvalidator;
             _unityOfWork = unityOfWork;
         }
 
         public async Task<PaginationResponse<SkillResponse>> GetAsync( SkillParameters skillParameters)
         {
-
             return new PaginationResponse<SkillResponse>{
                 Take = skillParameters.Take,
                 Skip = skillParameters.Skip,
@@ -35,5 +37,25 @@ namespace joinfreela.Application.Services
                 Data = _mapper.Map<IEnumerable<SkillResponse>>(await _skillRepository.GetAsync(skillParameters.Skip,skillParameters.Take,skillParameters.Filter()))
             };
         }
+        public override async Task<SkillResponse> RegisterAsync(SkillRequest request)
+        {
+            var validationResult = await _skillRequestvalidator.ValidateAsync(request);
+            if( ! validationResult.IsValid)
+                throw new BadRequestException(validationResult);
+            
+            // var skill = _mapper.Map<Skill>(request);
+            var skill = new Skill{
+                Id = request.Id,
+                CreatedAt = request.CreatedAt,
+                UpdateAt = request.UpdatedAt,
+                Name = request.Name
+            };
+            
+            await _skillRepository.RegisterAsync(skill);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            return _mapper.Map<SkillResponse>(skill);
+        }
+    
     }
 }

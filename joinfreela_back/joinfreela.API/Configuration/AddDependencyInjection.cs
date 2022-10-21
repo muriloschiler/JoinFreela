@@ -20,7 +20,7 @@ namespace joinfreela.API.Configuration
             services.AddScoped<IOwnerRepository,OwnerRepository>();
             services.AddScoped<IFreelancerRepository,FreelancerRepository>();
             services.AddScoped<IProjectRepository,ProjectRepository>();
-            services.AddScoped<SkillRepository,SkillRepository>();
+            services.AddScoped<ISkillRepository,SkillRepository>();
             services.AddScoped<IContractRepository,ContractRepository>();
             services.AddScoped<IAuthService,AuthService>();
             services.AddScoped<ISkillService,SkillService>();

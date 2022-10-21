@@ -8,7 +8,7 @@ namespace joinfreela.Application.Parameters
 {
     public class ProjectParameters : BaseParameters<Project>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int? Active { get; set; } = 0 ;  
         public int? OwnerId { get; set; }
         public override Expression<Func<Project, bool>> Filter()

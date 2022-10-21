@@ -9,7 +9,7 @@ namespace joinfreela.Application.Validators
         public FreelancerRequestValidator(ISkillRepository _skillRepository)
         {
             RuleForEach(fr=>fr.Skills)
-                .SetValidator(new SkillRequestValidator(_skillRepository));
+                .SetValidator(new UserSkillRequestValidator(_skillRepository));
         }
     }
 }

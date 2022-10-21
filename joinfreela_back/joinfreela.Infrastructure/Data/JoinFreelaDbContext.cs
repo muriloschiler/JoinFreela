@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace joinfreela.Infrastructure.Data
 {
-    public class Task : DbContext
+    public class JoinFreelaDbContext : DbContext
     {
         public DbSet<Project> Projects { get; set; }
         public DbSet<Owner> Owners { get; set; }

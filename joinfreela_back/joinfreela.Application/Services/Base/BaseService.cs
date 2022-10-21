@@ -55,7 +55,6 @@ namespace joinfreela.Application.Services.Base
             return _mapper.Map<Tresponse>(model);
         } 
 
-
         public virtual async Task<Tresponse> UpdateAsync(int id, Trequest request)
         {
             var validationResult = await _requestvalidator.ValidateAsync(request);

@@ -1,9 +1,13 @@
 using joinfreela.API.Configuration;
+using joinfreela.API.Filters;
 using joinfreela.Application.Mappers;
 using joinfreela.Application.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+builder.Services.AddControllers(c=>
+{
+    c.Filters.Add<ExceptionFilters>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 ConfigureConfiguration(builder.Services,builder.Configuration);

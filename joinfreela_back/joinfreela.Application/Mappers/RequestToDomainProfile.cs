@@ -28,8 +28,10 @@ namespace joinfreela.Application.Mappers
             CreateMap<NominationRequest,Nomination>()
                 .ForMember(no=>no.FreelancerId, m=>m.MapFrom(req=> _authService.AuthUser.Id));
             
-            CreateMap<SkillRequest,UserSkill>()
+            CreateMap<UserSkillRequest,UserSkill>()
                 .ForMember(usk=>usk.FreelancerId,m=>m.MapFrom(req=> _authService.AuthUser.Id));
-        }       
+        }   
+        public RequestToDomainProfile()
+        {}    
     }
 }
