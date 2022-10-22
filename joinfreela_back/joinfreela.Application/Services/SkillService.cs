@@ -1,11 +1,8 @@
 using AutoMapper;
 using FluentValidation;
-using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
-using joinfreela.Application.Parameters;
-using joinfreela.Application.Parameters.Base;
 using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
@@ -28,28 +25,13 @@ namespace joinfreela.Application.Services
             _unityOfWork = unityOfWork;
         }
 
-        public async Task<PaginationResponse<SkillResponse>> GetAsync( SkillParameters skillParameters)
-        {
-            return new PaginationResponse<SkillResponse>{
-                Take = skillParameters.Take,
-                Skip = skillParameters.Skip,
-                Count = await _skillRepository.Count(skillParameters.Filter()), 
-                Data = _mapper.Map<IEnumerable<SkillResponse>>(await _skillRepository.GetAsync(skillParameters.Skip,skillParameters.Take,skillParameters.Filter()))
-            };
-        }
         public override async Task<SkillResponse> RegisterAsync(SkillRequest request)
         {
             var validationResult = await _skillRequestvalidator.ValidateAsync(request);
             if( ! validationResult.IsValid)
                 throw new BadRequestException(validationResult);
             
-            // var skill = _mapper.Map<Skill>(request);
-            var skill = new Skill{
-                Id = request.Id,
-                CreatedAt = request.CreatedAt,
-                UpdateAt = request.UpdatedAt,
-                Name = request.Name
-            };
+             var skill = _mapper.Map<Skill>(request);
             
             await _skillRepository.RegisterAsync(skill);
             //Interaction

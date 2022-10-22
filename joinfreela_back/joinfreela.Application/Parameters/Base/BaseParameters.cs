@@ -1,9 +1,10 @@
 using System.Linq.Expressions;
+using joinfreela.Application.Interfaces.Parameters;
 using joinfreela.Domain.Classes.Base;
 
 namespace joinfreela.Application.Parameters.Base
 {
-    public abstract class BaseParameters<T>
+    public abstract class BaseParameters<T> :IBaseParameters<T> 
     where T: Register
     {
         public int Take { get; set; } = 5;

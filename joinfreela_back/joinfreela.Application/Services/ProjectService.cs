@@ -1,17 +1,14 @@
 using System.Data.Entity;
 using AutoMapper;
 using FluentValidation;
-using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Job;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
-using joinfreela.Application.Parameters;
 using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
-using joinfreela.Domain.Models;
-
+g
 namespace joinfreela.Application.Services
 {
     public class ProjectService : BaseService<Project, ProjectRequest, ProjectResponse>, IProjectService
@@ -35,15 +32,6 @@ namespace joinfreela.Application.Services
             _authService=authService;
         }
 
-        public async Task<PaginationResponse<ProjectResponse>> GetAsync(ProjectParameters parameters)
-        {
-            return new PaginationResponse<ProjectResponse>{
-                Skip = parameters.Skip,
-                Take = parameters.Take,
-                Count = await _projectRepository.Count(parameters.Filter()),
-                Data = _mapper.Map<IEnumerable<ProjectResponse>>(await _projectRepository.GetAsync(parameters.Skip,parameters.Take, parameters.Filter()))
-            };
-        }
         public override async Task<ProjectResponse> UpdateAsync(int id, ProjectRequest request)
         {
             var validationResult = await _projectRequestvalidator.ValidateAsync(request);

@@ -10,7 +10,6 @@ namespace joinfreela.Application.Interfaces.Services
 {
     public interface IProjectService : IBaseService<Project,ProjectRequest,ProjectResponse>
     {
-        public Task<PaginationResponse<ProjectResponse>> GetAsync(ProjectParameters projectParameters);
         Task AddJobAsync(int projectId, JobRequest request);
     }
 }

@@ -3,6 +3,7 @@ using FluentValidation;
 using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Common;
 using joinfreela.Application.Exceptions;
+using joinfreela.Application.Interfaces.Parameters;
 using joinfreela.Application.Interfaces.Services.Base;
 using joinfreela.Application.Parameters.Base;
 using joinfreela.Domain.Classes.Base;
@@ -28,7 +29,15 @@ namespace joinfreela.Application.Services.Base
             _mapper = mapper;
             _requestvalidator = requestvalidator;
             _unityOfWork = unityOfWork;
-            
+        }
+        public virtual async Task<PaginationResponse<Tresponse>> GetAsync(IBaseParameters<Tmodel> parameters)
+        {
+            return new PaginationResponse<Tresponse>{
+                Skip = parameters.Skip,
+                Take = parameters.Take,
+                Count = await _repository.Count(parameters.Filter()),
+                Data = _mapper.Map<IEnumerable<Tresponse>>(await _repository.GetAsync(parameters.Skip,parameters.Take, parameters.Filter()))
+            };
         }
 
         public virtual async Task<Tresponse> GetById(int id)
