@@ -8,7 +8,8 @@ using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
-g
+using joinfreela.Domain.Models;
+
 namespace joinfreela.Application.Services
 {
     public class ProjectService : BaseService<Project, ProjectRequest, ProjectResponse>, IProjectService
