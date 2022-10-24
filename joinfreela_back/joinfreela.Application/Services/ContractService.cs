@@ -1,6 +1,3 @@
-using System.Data.Entity;
-using AutoMapper;
-using FluentValidation;
 using joinfreela.Application.DTOs.Contract;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
@@ -8,6 +5,9 @@ using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
 using joinfreela.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using AutoMapper;
 
 namespace joinfreela.Application.Services
 {
@@ -29,12 +29,11 @@ namespace joinfreela.Application.Services
             _authService=authService;
             
             _contractRepository.AddPreQuery(query=>query.Include(co=>co.Freelancer));
-            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Job));
-            
-            var jobsByOwner = _projectRepository.Query()
-                .Where(po=>po.OwnerId == _authService.AuthUser.Id)    
+            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Job).ThenInclude(jo=>jo.Nominations));
+            _projectRepository.AddPreQuery(query=>query.Where(po=>po.OwnerId == _authService.AuthUser.Id));
+
+            var jobsByOwner = _projectRepository.Query()    
                 .SelectMany(po=>po.Jobs);
-            
             _contractRepository.AddPreQuery(query=>query.Where(co => jobsByOwner.Any(jo=>jo.Id == co.JobId)));
                     
         }
@@ -44,8 +43,22 @@ namespace joinfreela.Application.Services
             var validationResult = await _requestvalidator.ValidateAsync(request);
             if(!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
+            
+            var job = _projectRepository.Query()
+                .SelectMany(po=>po.Jobs)
+                .FirstOrDefault(jo=> jo.Id == request.JobId);
 
-            throw new NotImplementedException();            
+            if(job is null)
+                throw new BadRequestException("Nenhum de seus projetos contém a vaga informada");
+
+            if( ! job.Nominations.Any(no=>no.FreelancerId == request.FreelancerId))
+                throw new BadRequestException("O Freelancer informado não se candidatou para a vaga");
+
+            var contract = _mapper.Map<Contract>(request);
+            await _contractRepository.RegisterAsync(contract);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            return _mapper.Map<ContractResponse>(contract);
         }
     }
 }
