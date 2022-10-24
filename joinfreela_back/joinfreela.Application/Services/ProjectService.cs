@@ -27,10 +27,11 @@ namespace joinfreela.Application.Services
             _projectRepository=projectRepository;
             _mapper =mapper;
             _projectRequestvalidator = projectRequestvalidator;
-            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Jobs));
             _jobRequestvalidator = jobRequestvalidator;
             _unityOfWork = unityOfWork;
             _authService=authService;
+
+            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Jobs));
         }
 
         public override async Task<ProjectResponse> UpdateAsync(int id, ProjectRequest request)
@@ -38,9 +39,6 @@ namespace joinfreela.Application.Services
             var validationResult = await _projectRequestvalidator.ValidateAsync(request);
             if(!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
-
-            if (id != request.Id)
-                throw new BadRequestException("Os id's presentes na rota e na request são diferentes");
 
             var project = await _projectRepository.GetByIdAsync(id);
             if (project is null)
@@ -71,28 +69,50 @@ namespace joinfreela.Application.Services
             return _mapper.Map<ProjectResponse>(project);
         }
 
-        public async Task AddJobAsync(int projectId, JobRequest request)
+        public async Task<JobResponse> AddJobAsync(int projectId, JobRequest request)
+        {
+            var project = await ValidationsForProject(projectId, request);
+
+            var job = _mapper.Map<Job>(request);
+            project.Jobs.Add(job);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            
+            return _mapper.Map<JobResponse>(job);
+        }
+
+        public async Task<JobResponse> UpdateJobAsync(int projectId, int jobId, JobRequest request)
+        {
+            var project = await ValidationsForProject(projectId, request);
+            
+            var job = project.Jobs.FirstOrDefault(jo=>jo.Id == jobId); 
+            if( job is null)
+                throw new BadRequestException("O projeto informado não contém a vaga informada");
+            
+            _mapper.Map<JobRequest,Job>(request,job);
+            await _projectRepository.UpdateAsync(project);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            return _mapper.Map<JobResponse>(job);
+        }
+
+        private async Task<Project> ValidationsForProject(int projectId, JobRequest request)
         {
             var validationResult = await _jobRequestvalidator.ValidateAsync(request);
-            if(!validationResult.IsValid)
+            if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
-            
-            if (projectId != request.ProjectId)
-                throw new BadRequestException("Os id's presentes na rota e na request são diferentes");
 
             var project = await _projectRepository.GetByIdAsync(projectId);
 
             if (project is null)
                 throw new NotFoundException($"{nameof(Project)} não existe");
-            
-            if(project.OwnerId != _authService.AuthUser.Id)
+
+            if (project.OwnerId != _authService.AuthUser.Id)
                 throw new NotAuthorizedException();
-            
-            project.Jobs.Add(_mapper.Map<Job>(request));
-            //Interaction
-            await _unityOfWork.CommitChangesAsync();
-            
-            return;
+        
+            return project;
         }
     }
+
+
 }

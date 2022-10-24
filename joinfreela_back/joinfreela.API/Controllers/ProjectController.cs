@@ -27,6 +27,12 @@ namespace joinfreela.API.Controllers
            return Ok(page);
         }  
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ProjectResponse>> GetById(int id)
+        {
+            return Ok(await _projectService.GetById(id));
+        }
+
         [HttpPost]
         public async Task<ActionResult<ProjectResponse>> RegisterAsync([FromBody] ProjectRequest projectRequest)
         {
@@ -48,10 +54,15 @@ namespace joinfreela.API.Controllers
         }
     
         [HttpPost("{projectId:int}/job")]
-        public async Task<IActionResult> RegisterJobAsync(int projectId,[FromBody] JobRequest request)
+        public async Task<ActionResult<JobResponse>> RegisterJobAsync(int projectId,[FromBody] JobRequest request)
         {
-            await _projectService.AddJobAsync(projectId,request);
-            return NoContent();
+            return Ok(await _projectService.AddJobAsync(projectId,request));
+        }
+
+        [HttpPost("{projectId:int}/job/{JobId:int}")]
+        public async Task<ActionResult<JobResponse>> UpdateJobAsync(int projectId, int JobId,[FromBody] JobRequest request)
+        {
+            return Ok(await _projectService.UpdateJobAsync(projectId, JobId,request));
         }
     }
 }
