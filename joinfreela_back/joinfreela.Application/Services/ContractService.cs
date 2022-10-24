@@ -14,19 +14,29 @@ namespace joinfreela.Application.Services
     public class ContractService : BaseService<Contract, ContractRequest, ContractResponse>, IContractService
     {
         private IContractRepository _contractRepository { get; set; }
+        private IProjectRepository _projectRepository { get; set;}
         private IMapper _mapper { get; set; }
         private IValidator<ContractRequest> _requestvalidator { get; set; }
         private IUnityOfWork _unityOfWork { get; set; }
         private IAuthService _authService { get; set; }
-        public ContractService(IContractRepository contractRepository, IMapper mapper, IValidator<ContractRequest> requestvalidator, IUnityOfWork unityOfWork,IAuthService authService) : base(contractRepository, mapper, requestvalidator, unityOfWork)
+        public ContractService(IContractRepository contractRepository,IProjectRepository projectRepository, IMapper mapper, IValidator<ContractRequest> requestvalidator, IUnityOfWork unityOfWork,IAuthService authService) : base(contractRepository, mapper, requestvalidator, unityOfWork)
         {
             _contractRepository = contractRepository;
-            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Freelancer));
-            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Job));
+            _projectRepository = projectRepository;
             _mapper = mapper;
             _unityOfWork = unityOfWork;
             _requestvalidator = requestvalidator;
             _authService=authService;
+            
+            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Freelancer));
+            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Job));
+            
+            var jobsByOwner = _projectRepository.Query()
+                .Where(po=>po.OwnerId == _authService.AuthUser.Id)    
+                .SelectMany(po=>po.Jobs);
+            
+            _contractRepository.AddPreQuery(query=>query.Where(co => jobsByOwner.Any(jo=>jo.Id == co.JobId)));
+                    
         }
         
         public override async Task<ContractResponse> RegisterAsync(ContractRequest request)
