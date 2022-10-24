@@ -24,6 +24,12 @@ namespace joinfreela.API.Controllers
         public async Task<ActionResult<ContractResponse>> RegisterAsync([FromBody] ContractRequest contractRequest)
         {
             return Ok(await _contractService.RegisterAsync(contractRequest));
-        }   
+        }
+
+        [HttpPut("{id:int}")]   
+        public async Task<ActionResult<ContractResponse>> UpdateAsync(int id,[FromBody] ContractRequest contractRequest)
+        {
+            return Ok(await _contractService.UpdateAsync(id,contractRequest));
+        }
     }
 }

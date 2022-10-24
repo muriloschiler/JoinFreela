@@ -69,10 +69,7 @@ namespace joinfreela.Application.Services.Base
             var validationResult = await _requestvalidator.ValidateAsync(request);
             if( ! validationResult.IsValid)
                 throw new BadRequestException(validationResult);
-
-            if(id != request.Id)
-                throw new BadRequestException("Os id's presentes na rota e na request são diferentes");
-        
+                
             var model = await _repository.GetByIdAsync(id);
             if (model is null)
                 throw new NotFoundException($"{nameof(Tmodel)} não existe");
