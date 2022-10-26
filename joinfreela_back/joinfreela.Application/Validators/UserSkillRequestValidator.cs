@@ -9,7 +9,6 @@ namespace joinfreela.Application.Validators
     {
         public UserSkillRequestValidator(ISkillRepository _skillRepository)
         {
-            //UserSkill
             RuleFor(usr=>usr.SkillId)
                 .MustAsync(async (skillId,CancellationToken)=>
                     await _skillRepository.Query().AnyAsync(sk=>sk.Id==skillId))

@@ -8,6 +8,10 @@ namespace joinfreela.Domain.Models
         public int JobId { get; set; }
         public Job Job { get; set; }
         public int FreelancerId { get; set; }
+        public int Active { get; set; }
         public Freelancer Freelancer { get; set; }
+        public IEnumerable<Payment> Payments { get; set; }
+        
+        
     }
 }

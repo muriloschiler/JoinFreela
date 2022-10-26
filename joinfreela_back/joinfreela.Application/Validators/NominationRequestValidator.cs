@@ -31,8 +31,7 @@ namespace joinfreela.Application.Validators
                 .MustAsync(async(jobId,CancellationToken)=>
                     await _projectRepository.Query()
                         .Include(pr=>pr.Jobs)
-                        .AnyAsync(pr=> pr.Jobs.Any(jo=>jo.Id==jobId)
-                            && pr.Active == 0))
+                        .AnyAsync(pr=> pr.Jobs.Any(jo=>jo.Id==jobId) && pr.Active == 0))
                 .WithMessage("O projeto não se encontra mais ativo ");            
         }
     }

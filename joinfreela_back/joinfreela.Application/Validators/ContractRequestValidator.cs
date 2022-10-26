@@ -24,7 +24,7 @@ namespace joinfreela.Application.Validators
             .MustAsync(async (jobId,CancellationToken)=>
                 await _projectRepository.Query()
                     .Include(pr=>pr.Jobs)
-                    .AnyAsync(pr=>pr.Jobs.Any(jo=>jo.Open == 0)))
+                    .AnyAsync(pr=>pr.Jobs.Any(jo=>jo.Id == jobId && jo.Open == 0)))
             .WithMessage("Vaga não se encontra mais ativa");
 
             RuleFor(cr=>cr.FreelancerId)
@@ -38,7 +38,7 @@ namespace joinfreela.Application.Validators
             .NotEmpty()
             .MustAsync(async (freelancerId,CancellationToken)=> 
                 await _freelancerRepository.Query()
-                    .AnyAsync(fr=>fr.Active == 0))
+                    .AnyAsync(fr=>fr.Id == freelancerId && fr.Active == 0))
             .WithMessage("Freelancer não se encontra mais ativo");
         }
     }
