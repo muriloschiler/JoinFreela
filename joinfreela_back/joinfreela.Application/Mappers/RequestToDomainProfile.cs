@@ -1,4 +1,5 @@
 using AutoMapper;
+using joinfreela.Application.DTOs.Common;
 using joinfreela.Application.DTOs.Contract;
 using joinfreela.Application.DTOs.Enumerations;
 using joinfreela.Application.DTOs.Freelancer;
@@ -8,6 +9,7 @@ using joinfreela.Application.DTOs.Owner;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Application.Interfaces.Services;
+using joinfreela.Domain.Classes.Base;
 using joinfreela.Domain.Models;
 using joinfreela.Domain.Models.Enumerations;
 

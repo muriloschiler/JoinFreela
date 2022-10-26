@@ -5,11 +5,9 @@ using joinfreela.Application.DTOs.Common;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Parameters;
 using joinfreela.Application.Interfaces.Services.Base;
-using joinfreela.Application.Parameters.Base;
 using joinfreela.Domain.Classes.Base;
 using joinfreela.Domain.Interfaces.Repositories.Base;
 using joinfreela.Domain.Interfaces.UnitOfWork;
-using joinfreela.Infrastructure.Repositories.Base;
 
 namespace joinfreela.Application.Services.Base
 {
