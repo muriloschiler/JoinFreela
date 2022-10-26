@@ -1,8 +1,8 @@
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 
 namespace joinfreela.Application.DTOs.Contract
 {
-    public class ContractRequest : RegisterViewModel
+    public class ContractRequest : RegisterRequest
     {
         public int JobId { get; set; }
         public int FreelancerId { get; set; }

@@ -1,8 +1,8 @@
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 
 namespace joinfreela.Application.DTOs.Skill
 {
-    public class SkillRequest : RegisterViewModel
+    public class SkillRequest : RegisterRequest
     {
         public string Name { get; set; }
     }

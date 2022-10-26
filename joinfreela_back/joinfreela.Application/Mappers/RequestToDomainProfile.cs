@@ -1,11 +1,12 @@
 using AutoMapper;
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 using joinfreela.Application.DTOs.Contract;
 using joinfreela.Application.DTOs.Enumerations;
 using joinfreela.Application.DTOs.Freelancer;
 using joinfreela.Application.DTOs.Job;
 using joinfreela.Application.DTOs.Nomination;
 using joinfreela.Application.DTOs.Owner;
+using joinfreela.Application.DTOs.Payment;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Application.Interfaces.Services;
@@ -24,6 +25,7 @@ namespace joinfreela.Application.Mappers
             CreateMap<OwnerRequest,Owner>();
             CreateMap<ProjectRequest,Project>();
             CreateMap<SkillRequest,Skill>();
+            CreateMap<PaymentRequest,Payment>();
             CreateMap<FreelancerRequest,Freelancer>();
             CreateMap<SeniorityViewModel,Seniority>();
             

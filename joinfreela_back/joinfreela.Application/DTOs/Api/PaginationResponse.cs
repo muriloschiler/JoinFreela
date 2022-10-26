@@ -1,9 +1,9 @@
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 
 namespace joinfreela.Application.DTOs.Api
 {
     public class PaginationResponse<T> 
-    where T: RegisterViewModel
+    where T: RegisterResponse
     {
         public int Take { get; set; }
         public int Skip { get; set; }

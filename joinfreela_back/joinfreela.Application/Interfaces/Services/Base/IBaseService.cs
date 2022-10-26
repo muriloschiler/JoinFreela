@@ -1,5 +1,5 @@
 using joinfreela.Application.DTOs.Api;
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 using joinfreela.Application.Interfaces.Parameters;
 using joinfreela.Application.Parameters.Base;
 using joinfreela.Domain.Classes.Base;
@@ -8,8 +8,8 @@ namespace joinfreela.Application.Interfaces.Services.Base
 {
     public interface IBaseService<Tmodel,Trequest,Tresponse>
     where Tmodel: Register
-    where Trequest: RegisterViewModel
-    where Tresponse: RegisterViewModel
+    where Trequest: RegisterRequest
+    where Tresponse: RegisterResponse
     {
         public Task<PaginationResponse<Tresponse>> GetAsync(IBaseParameters<Tmodel> parameters);
         public Task<Tresponse> GetById(int id);

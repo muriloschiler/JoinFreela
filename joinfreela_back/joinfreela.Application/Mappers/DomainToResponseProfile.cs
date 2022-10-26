@@ -5,6 +5,7 @@ using joinfreela.Application.DTOs.Freelancer;
 using joinfreela.Application.DTOs.Job;
 using joinfreela.Application.DTOs.Nomination;
 using joinfreela.Application.DTOs.Owner;
+using joinfreela.Application.DTOs.Payment;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Domain.Models;
@@ -21,6 +22,7 @@ namespace joinfreela.Application.Mappers
             CreateMap<Owner,OwnerResponse>();
             CreateMap<Project,ProjectResponse>();
             CreateMap<Skill,SkillResponse>();
+            CreateMap<Payment,PaymentResponse>();
             CreateMap<Freelancer,FreelancerResponse>();
             CreateMap<Seniority,SeniorityViewModel>();
             CreateMap<Nomination,NominationResponse>();

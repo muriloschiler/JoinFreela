@@ -1,7 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using joinfreela.Application.DTOs.Api;
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Parameters;
 using joinfreela.Application.Interfaces.Services.Base;
@@ -13,8 +13,8 @@ namespace joinfreela.Application.Services.Base
 {
     public abstract class BaseService<Tmodel,Trequest,Tresponse> : IBaseService<Tmodel,Trequest,Tresponse>
     where Tmodel:Register
-    where Trequest: RegisterViewModel
-    where Tresponse: RegisterViewModel
+    where Trequest: RegisterRequest
+    where Tresponse: RegisterResponse
     {
         private IBaseRepository<Tmodel> _repository { get; set; }
         private IMapper _mapper { get; set; }

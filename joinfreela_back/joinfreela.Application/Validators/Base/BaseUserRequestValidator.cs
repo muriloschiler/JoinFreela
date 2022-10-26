@@ -1,10 +1,10 @@
 using FluentValidation;
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 
 namespace joinfreela.Application.Validators.Base
 {
     public class BaseUserRequestValidator<T>: AbstractValidator<T>
-    where T:UserViewModel
+    where T: UserRequest
     {
         public BaseUserRequestValidator()
         {

@@ -1,4 +1,4 @@
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 using joinfreela.Application.DTOs.Contract;
 using joinfreela.Application.DTOs.Enumerations;
 using joinfreela.Application.DTOs.Nomination;
@@ -6,7 +6,7 @@ using joinfreela.Application.DTOs.Project;
 
 namespace joinfreela.Application.DTOs.Job
 {
-    public class JobResponse:RegisterViewModel
+    public class JobResponse:RegisterResponse
     {
         public string Title { get; set; }
         public int Description { get; set; }

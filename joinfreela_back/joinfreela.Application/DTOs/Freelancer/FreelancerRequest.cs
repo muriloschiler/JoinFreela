@@ -1,9 +1,9 @@
-using joinfreela.Application.DTOs.Common;
+using joinfreela.Application.DTOs.Common.Base;
 using joinfreela.Application.DTOs.Skill;
 
 namespace joinfreela.Application.DTOs.Freelancer
 {
-    public class FreelancerRequest:UserViewModel
+    public class FreelancerRequest : UserRequest
     {
         public IEnumerable<UserSkillRequest>? Skills  { get; set; }
     }

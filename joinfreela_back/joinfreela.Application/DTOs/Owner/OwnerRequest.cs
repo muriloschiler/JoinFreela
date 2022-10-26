@@ -1,8 +1,6 @@
-using joinfreela.Application.DTOs.Common;
-using joinfreela.Application.DTOs.Project;
-
+using joinfreela.Application.DTOs.Common.Base;
 namespace joinfreela.Application.DTOs.Owner
 {
-    public class OwnerRequest: UserViewModel
+    public class OwnerRequest: UserRequest
     {}
 }
