@@ -21,7 +21,7 @@ namespace joinfreela.API.Filters
                 );
             }
             
-            if(context.Exception is NotFoundException){
+            else if(context.Exception is NotFoundException){
                 var exception = context.Exception as NotFoundException;
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 context.Result = new JsonResult(
@@ -31,7 +31,7 @@ namespace joinfreela.API.Filters
                 );
             }
 
-            if(context.Exception is NotAuthorizedException){
+            else if(context.Exception is NotAuthorizedException){
                 var exception = context.Exception as NotAuthorizedException;
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 context.Result = new JsonResult(
@@ -40,6 +40,16 @@ namespace joinfreela.API.Filters
                     }
                 );
             }
+            else if(context.Exception is PaymentException){
+                var exception = context.Exception as PaymentException;
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Result= new JsonResult(
+                    new{
+                        Message = exception.Message
+                    }
+                );
+            }
+
         }
     }
 }

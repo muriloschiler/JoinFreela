@@ -28,6 +28,7 @@ namespace joinfreela.API.Configuration
             services.AddScoped<IContractService,ContractService>();
             services.AddScoped<IFreelancerService,FreelancerService>();
             services.AddScoped<IOwnerService,OwnerService>();
+            services.AddHttpClient();
 
             services.AddFluentValidation(fv =>
             {

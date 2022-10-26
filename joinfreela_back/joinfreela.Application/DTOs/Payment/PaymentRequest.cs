@@ -5,7 +5,6 @@ namespace joinfreela.Application.DTOs.Payment
     public class PaymentRequest: RegisterRequest
     {
         public decimal Value { get; set; }
-        public int ContractId { get; set; }
-
+        public int? ContractId { get; set; }
     }
 }

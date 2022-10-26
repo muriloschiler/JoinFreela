@@ -1,6 +1,7 @@
 using joinfreela.Application.Constants;
 using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Contract;
+using joinfreela.Application.DTOs.Payment;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Parameters;
 using Microsoft.AspNetCore.Authorization;
@@ -51,5 +52,12 @@ namespace joinfreela.API.Controllers
         {
             return Ok(await _contractService.DeleteAsync(id));
         }
+    
+        [HttpPost("/{contractId:int/payment}")]
+        public async Task<ActionResult<PaymentResponse>> RegisterPaymentAsync(int contractId,[FromBody] PaymentRequest request)
+        {
+            request.ContractId = contractId ;
+            return Ok(await _contractService.RegisterPaymentAsync(request));
+        } 
     }
 }
