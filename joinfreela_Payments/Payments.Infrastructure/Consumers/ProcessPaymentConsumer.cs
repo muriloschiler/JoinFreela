@@ -69,7 +69,7 @@ namespace Payments.Infrastructure.Consumers
 
         private void PublishPaymentDone(PaymentRequest request)
         {
-            var paymentDoneBytesArray = SerializeBytesArray(new PaymentDoneIntegrationEvent(request.ContractId));
+            var paymentDoneBytesArray = SerializeBytesArray(new PaymentDoneIntegrationEvent(request.Id));
             _channel.BasicPublish(
                 exchange: "",
                 routingKey: PAYMENTS_DONE_QUEUE,

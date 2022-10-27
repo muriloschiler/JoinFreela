@@ -21,7 +21,7 @@ namespace joinfreela.Application.Services
     public class ContractService : BaseService<Contract, ContractRequest, ContractResponse>, IContractService
     {
 
-        private const string QUEUE_NAME = "Payments"; 
+        private const string PAYMENTS_PENDING_QUEUE = "PaymentsPending";
         private IContractRepository _contractRepository { get; set; }
         private IProjectRepository _projectRepository { get; set;}
         private IMapper _mapper { get; set; }
@@ -91,11 +91,11 @@ namespace joinfreela.Application.Services
             if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
 
-            PublicPayment(request);
-            await PaymentInDatabase(request);
+            var payment = await PaymentInDatabase(request);
+            PublicPayment(payment);
         }
 
-        private async Task PaymentInDatabase(PaymentRequest request)
+        private async Task<Payment> PaymentInDatabase(PaymentRequest request)
         {
             _contractRepository.AddPreQuery(query => query.Include(co => co.Payments));
             var contract = await _contractRepository.GetByIdAsync((int)request.ContractId);
@@ -103,13 +103,14 @@ namespace joinfreela.Application.Services
             contract.Payments.Add(payment);
             //interaction
             await _unityOfWork.CommitChangesAsync();
+            return payment;
         }
 
-        private void PublicPayment(PaymentRequest request)
+        private void PublicPayment(Payment payment)
         {
-            var requestJson = JsonSerializer.Serialize(request);
-            var requestJsonBytes = Encoding.UTF8.GetBytes(requestJson);
-            _messageBusService.Publish(QUEUE_NAME,requestJsonBytes);
+            var paymentJson = JsonSerializer.Serialize(payment);
+            var paymentJsonBytes = Encoding.UTF8.GetBytes(paymentJson);
+            _messageBusService.Publish(PAYMENTS_PENDING_QUEUE,paymentJsonBytes);
         }
 
         private async Task ValidationsRequest(ContractRequest request)

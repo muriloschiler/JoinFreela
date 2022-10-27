@@ -2,6 +2,7 @@ using joinfreela.API.Configuration;
 using joinfreela.API.Filters;
 using joinfreela.Application.Mappers;
 using joinfreela.Application.Options;
+using joinfreela.Infrastructure.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(c=>
@@ -35,5 +36,7 @@ void ConfigureServices(IServiceCollection services, ConfigurationManager configu
     services.AddAuthConfiguration(configuration);
     
     services.AddHttpContextAccessor();
+    
+    services.AddHostedService<PaymentDoneConsumer>();
     services.AddAutoMapper(typeof(RequestToDomainProfile),typeof(DomainToResponseProfile));
 }

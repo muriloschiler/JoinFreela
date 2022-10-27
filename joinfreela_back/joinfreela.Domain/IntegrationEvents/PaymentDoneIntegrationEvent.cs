@@ -1,4 +1,4 @@
-namespace Payments.Domain.Domain
+namespace joinfreela.Domain.IntegrationsEvents
 {
     public class PaymentDoneIntegrationEvent
     {
