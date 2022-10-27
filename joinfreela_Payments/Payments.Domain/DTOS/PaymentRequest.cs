@@ -1,4 +1,4 @@
-namespace Payments.Application.DTOS
+namespace Payments.Domain.DTOS
 {
     public class PaymentRequest
     {

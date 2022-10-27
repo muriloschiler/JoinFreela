@@ -1,6 +1,7 @@
-using Payments.Application.DTOS;
 
-namespace Payments.Application.Interfaces.Services
+using Payments.Domain.DTOS;
+
+namespace Payments.Domain.Interfaces.Services
 {
     public interface IPaymentService
     {

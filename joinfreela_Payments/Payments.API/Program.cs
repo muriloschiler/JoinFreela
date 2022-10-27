@@ -1,5 +1,6 @@
-using Payments.Application.Interfaces.Services;
 using Payments.Application.Services;
+using Payments.Domain.Interfaces.Services;
+using Payments.Infrastructure.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPaymentService,PaymentService>();
+builder.Services.AddHostedService<ProcessPaymentConsumer>();
 
 var app = builder.Build();
 

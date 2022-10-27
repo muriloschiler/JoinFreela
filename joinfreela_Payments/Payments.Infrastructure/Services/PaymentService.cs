@@ -1,5 +1,6 @@
-using Payments.Application.DTOS;
-using Payments.Application.Interfaces.Services;
+
+using Payments.Domain.DTOS;
+using Payments.Domain.Interfaces.Services;
 
 namespace Payments.Application.Services
 {
