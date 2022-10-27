@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BsKZvp9O8PJypZtX5VPCXlQuNI67CzHno4sVWpMGHrFZ9YmI9G5Qp6h9BitN2eckn98uBFzkahBhQrdrw3BHug==",
+  "dgSpecHash": "UcWGvEZPkNm1bpsyHGRD42XLv9QLLF83ne/xtWsRgB5Fy0R0nm0DbBghualqAiE7J6P7X2fTATpFYHgY7g6lfA==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Infrastructure/joinfreela.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "/home/user/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/home/user/.nuget/packages/rabbitmq.client/6.4.0/rabbitmq.client.6.4.0.nupkg.sha512",
     "/home/user/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.0.6/sqlitepclraw.bundle_e_sqlite3.2.0.6.nupkg.sha512",
     "/home/user/.nuget/packages/sqlitepclraw.core/2.0.6/sqlitepclraw.core.2.0.6.nupkg.sha512",
     "/home/user/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.0.6/sqlitepclraw.lib.e_sqlite3.2.0.6.nupkg.sha512",
@@ -31,7 +32,8 @@
     "/home/user/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
     "/home/user/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/user/.nuget/packages/system.text.encodings.web/6.0.0/system.text.encodings.web.6.0.0.nupkg.sha512",
-    "/home/user/.nuget/packages/system.text.json/6.0.0/system.text.json.6.0.0.nupkg.sha512"
+    "/home/user/.nuget/packages/system.text.json/6.0.0/system.text.json.6.0.0.nupkg.sha512",
+    "/home/user/.nuget/packages/system.threading.channels/4.7.1/system.threading.channels.4.7.1.nupkg.sha512"
   ],
   "logs": []
 }

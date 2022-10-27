@@ -5,8 +5,10 @@ using joinfreela.Application.Services;
 using joinfreela.Application.Utils;
 using joinfreela.Application.Validators;
 using joinfreela.Domain.Interfaces.Repositories;
+using joinfreela.Domain.Interfaces.Services;
 using joinfreela.Domain.Interfaces.UnitOfWork;
 using joinfreela.Infrastructure.Data;
+using joinfreela.Infrastructure.MessageBus;
 using joinfreela.Infrastructure.Repositories;
 using joinfreela.Infrastructure.UnitOfWork;
 
@@ -28,6 +30,7 @@ namespace joinfreela.API.Configuration
             services.AddScoped<IContractService,ContractService>();
             services.AddScoped<IFreelancerService,FreelancerService>();
             services.AddScoped<IOwnerService,OwnerService>();
+            services.AddScoped<IMessageBusService,MessageBusService>();
             services.AddHttpClient();
 
             services.AddFluentValidation(fv =>

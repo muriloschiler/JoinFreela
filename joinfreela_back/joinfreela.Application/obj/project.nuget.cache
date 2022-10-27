@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9h85C0BOJHOjQRPbgYrkGhMMKd//nCbunZcyCR2te95ziB/aclZoLs5LvX5T4UDFt8WlMQcbd3zjMtGdjseSeQ==",
+  "dgSpecHash": "WQq+HcJu2p+nXDja1S00fRcP4VRC8b40JDW7l5i9iwEMizV5LMMC5kox4s0y4XtInAUl76MIdb8JRnMOgMFN4w==",
   "success": true,
   "projectFilePath": "/home/user/Documentos/Projects/Back_End/JoinFreela/joinfreela_back/joinfreela.Application/joinfreela.Application.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "/home/user/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.win32.registry/4.6.0/microsoft.win32.registry.4.6.0.nupkg.sha512",
     "/home/user/.nuget/packages/microsoft.win32.systemevents/4.6.0/microsoft.win32.systemevents.4.6.0.nupkg.sha512",
+    "/home/user/.nuget/packages/rabbitmq.client/6.4.0/rabbitmq.client.6.4.0.nupkg.sha512",
     "/home/user/.nuget/packages/runtime.native.system.data.sqlclient.sni/4.6.0/runtime.native.system.data.sqlclient.sni.4.6.0.nupkg.sha512",
     "/home/user/.nuget/packages/runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/home/user/.nuget/packages/runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
@@ -67,6 +68,7 @@
     "/home/user/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/home/user/.nuget/packages/system.text.encodings.web/6.0.0/system.text.encodings.web.6.0.0.nupkg.sha512",
     "/home/user/.nuget/packages/system.text.json/6.0.0/system.text.json.6.0.0.nupkg.sha512",
+    "/home/user/.nuget/packages/system.threading.channels/4.7.1/system.threading.channels.4.7.1.nupkg.sha512",
     "/home/user/.nuget/packages/system.windows.extensions/4.6.0/system.windows.extensions.4.6.0.nupkg.sha512"
   ],
   "logs": []

@@ -14,11 +14,14 @@ using joinfreela.Application.Options;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text;
+using joinfreela.Domain.Interfaces.Services;
 
 namespace joinfreela.Application.Services
 {
     public class ContractService : BaseService<Contract, ContractRequest, ContractResponse>, IContractService
     {
+
+        private const string QUEUE_NAME = "Payments"; 
         private IContractRepository _contractRepository { get; set; }
         private IProjectRepository _projectRepository { get; set;}
         private IMapper _mapper { get; set; }
@@ -26,8 +29,9 @@ namespace joinfreela.Application.Services
         private IValidator<PaymentRequest> _paymentRequestvalidator { get; set; }
         private IUnityOfWork _unityOfWork { get; set; }
         private IAuthService _authService { get; set; }
-        private IHttpClientFactory _httpClientFactory { get; set; }
-        public readonly URLPaymentsAPI _URLPaymentsAPI ;
+        private IMessageBusService _messageBusService { get; set; }
+        
+        
         public ContractService
             (IContractRepository contractRepository,
             IProjectRepository projectRepository, 
@@ -36,8 +40,7 @@ namespace joinfreela.Application.Services
             IValidator<PaymentRequest> paymentRequestvalidator, 
             IUnityOfWork unityOfWork,
             IAuthService authService,
-            IHttpClientFactory httpClientFactory,
-            IOptions<URLPaymentsAPI> urlPaymentsOptions) : base(contractRepository, mapper, requestvalidator, unityOfWork)
+            IMessageBusService messageBusService) : base(contractRepository, mapper, requestvalidator, unityOfWork)
         {
             _contractRepository = contractRepository;
             _projectRepository = projectRepository;
@@ -46,8 +49,7 @@ namespace joinfreela.Application.Services
             _requestvalidator = requestvalidator;
             _paymentRequestvalidator=paymentRequestvalidator;
             _authService=authService;
-            _httpClientFactory=httpClientFactory;
-            _URLPaymentsAPI = urlPaymentsOptions.Value;
+            _messageBusService = messageBusService;
             
             _contractRepository.AddPreQuery(query=>query.Include(co=>co.Freelancer));
             _contractRepository.AddPreQuery(query=>query.Include(co=>co.Job).ThenInclude(jo=>jo.Nominations));
@@ -83,40 +85,31 @@ namespace joinfreela.Application.Services
             return _mapper.Map<ContractResponse>(contract);
         }
 
-        public async Task<PaymentResponse> RegisterPaymentAsync(PaymentRequest request)
+        public async Task RegisterPaymentAsync(PaymentRequest request)
         {
             var validationResult = await _paymentRequestvalidator.ValidateAsync(request);
             if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
 
-            var responseIsSuccess = await CallThePaymentAPI(request);
+            PublicPayment(request);
+            await PaymentInDatabase(request);
+        }
 
-            if (!responseIsSuccess)
-                throw new PaymentException();
-
-            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Payments));
+        private async Task PaymentInDatabase(PaymentRequest request)
+        {
+            _contractRepository.AddPreQuery(query => query.Include(co => co.Payments));
             var contract = await _contractRepository.GetByIdAsync((int)request.ContractId);
             var payment = _mapper.Map<Payment>(request);
             contract.Payments.Add(payment);
             //interaction
             await _unityOfWork.CommitChangesAsync();
-            return _mapper.Map<PaymentResponse>(payment);
         }
 
-        private async Task<bool> CallThePaymentAPI(PaymentRequest request)
+        private void PublicPayment(PaymentRequest request)
         {
-            var url = $"{_URLPaymentsAPI}/api/v1/payment";
-
-            var httpContent = new StringContent(
-                JsonSerializer.Serialize(request),
-                Encoding.UTF8,
-                "application/json"
-            );
-
-            var httpClient = _httpClientFactory.CreateClient("HttpPayment");
-            var response = await httpClient.PostAsync(url, httpContent);
-
-            return response.IsSuccessStatusCode;                
+            var requestJson = JsonSerializer.Serialize(request);
+            var requestJsonBytes = Encoding.UTF8.GetBytes(requestJson);
+            _messageBusService.Publish(QUEUE_NAME,requestJsonBytes);
         }
 
         private async Task ValidationsRequest(ContractRequest request)

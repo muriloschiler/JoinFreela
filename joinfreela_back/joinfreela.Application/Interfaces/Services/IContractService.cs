@@ -7,6 +7,6 @@ namespace joinfreela.Application.Interfaces.Services
 {
     public interface IContractService : IBaseService<Contract, ContractRequest, ContractResponse>
     {
-        Task<PaymentResponse> RegisterPaymentAsync(PaymentRequest request);
+        Task RegisterPaymentAsync(PaymentRequest request);
     }
 }

@@ -10,6 +10,9 @@ namespace joinfreela.Infrastructure.Data.Configurations
         public override void ConfigureOtherProperties(EntityTypeBuilder<Payment> builder)
         {
             builder.Property(pa=>pa.Value).HasColumnType("Real");
+            builder.Property(pa=>pa.Pending)
+                .HasColumnType("Integer")
+                .HasDefaultValue(0);
         }
     }
 }

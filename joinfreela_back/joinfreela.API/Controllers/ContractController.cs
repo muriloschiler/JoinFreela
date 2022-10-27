@@ -13,8 +13,7 @@ namespace joinfreela.API.Controllers
     [ApiController]
     [Authorize(Roles = UserRoles.Owner)]
     public class ContractController : ControllerBase
-    {
-       
+    {   
         public IContractService _contractService { get; set; }
 
         public ContractController(IContractService contractService)
@@ -57,7 +56,8 @@ namespace joinfreela.API.Controllers
         public async Task<ActionResult<PaymentResponse>> RegisterPaymentAsync(int contractId,[FromBody] PaymentRequest request)
         {
             request.ContractId = contractId ;
-            return Ok(await _contractService.RegisterPaymentAsync(request));
+            await _contractService.RegisterPaymentAsync(request);
+            return Accepted();
         } 
     }
 }

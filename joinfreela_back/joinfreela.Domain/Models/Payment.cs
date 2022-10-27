@@ -7,5 +7,6 @@ namespace joinfreela.Domain.Models
         public decimal Value { get; set; }
         public int ContractId { get; set; }
         public Contract Contract { get; set; }
+        public int Pending { get; set; }
     }
 }
