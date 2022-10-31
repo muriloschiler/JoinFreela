@@ -17,7 +17,7 @@ namespace joinfreela.Infrastructure.Consumers
         public readonly IModel _channel;
         public readonly IServiceProvider _serviceProvider;
         
-        public PaymentDoneConsumer(IConnection connection, IModel channel, IServiceProvider serviceProvider)
+        public PaymentDoneConsumer(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
 
