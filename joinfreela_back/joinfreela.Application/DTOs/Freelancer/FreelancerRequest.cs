@@ -5,6 +5,6 @@ namespace joinfreela.Application.DTOs.Freelancer
 {
     public class FreelancerRequest : UserRequest
     {
-        public IEnumerable<UserSkillRequest>? Skills  { get; set; }
+        public IEnumerable<UserSkillRequest> Skills  { get; set; }
     }
 }

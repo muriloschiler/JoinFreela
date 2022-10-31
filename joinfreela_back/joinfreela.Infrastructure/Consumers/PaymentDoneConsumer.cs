@@ -12,77 +12,82 @@ namespace joinfreela.Infrastructure.Consumers
 {
     public class PaymentDoneConsumer : BackgroundService
     {
-        private const string PAYMENTS_DONE_QUEUE = "PaymentsDone";
-        public readonly IConnection _connection;
-        public readonly IModel _channel;
-        public readonly IServiceProvider _serviceProvider;
-        
-        public PaymentDoneConsumer(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-
-            var connectionFactory = new ConnectionFactory
-            {
-                HostName = "localhost"
-            };
-
-            _connection = connectionFactory.CreateConnection();
-            _channel = _connection.CreateModel();
-
-            _channel.QueueDeclare(
-                queue: PAYMENTS_DONE_QUEUE,
-                durable:false,
-                exclusive:false,
-                autoDelete:false,
-                arguments:null);
-        }
-        
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var consumer = new EventingBasicConsumer(_channel);
-            SettingConsumerBehavior(consumer);
-
-            _channel.BasicConsume(PAYMENTS_DONE_QUEUE, false, consumer);
             return Task.CompletedTask;
         }
+    // {
+    //     private const string PAYMENTS_DONE_QUEUE = "PaymentsDone";
+    //     public readonly IConnection _connection;
+    //     public readonly IModel _channel;
+    //     public readonly IServiceProvider _serviceProvider;
 
-        private void SettingConsumerBehavior(EventingBasicConsumer consumer)
-        {
-            consumer.Received += async (sender, eventArgs) =>
-            {
-                var paymentDone = DeserializeBytesArray<PaymentDoneIntegrationEvent>(eventArgs.Body.ToArray());   
-                await SetModelPaymentDone(paymentDone);
-                _channel.BasicAck(eventArgs.DeliveryTag, false);
-            };
-        }
+    //     public PaymentDoneConsumer(IServiceProvider serviceProvider)
+    //     {
+    //         _serviceProvider = serviceProvider;
 
-        private async Task SetModelPaymentDone(PaymentDoneIntegrationEvent paymentDone)
-        {
-            using(var scope = _serviceProvider.CreateScope())
-            {
-                var contractRepository = scope.ServiceProvider.GetService<IContractRepository>();
-                var payment = contractRepository.Query()
-                    .SelectMany(co=>co.Payments)
-                    .FirstOrDefault(pa=>pa.Id == paymentDone.PaymentId);
-                
-                payment.Pending = 1;
+    //         var connectionFactory = new ConnectionFactory
+    //         {
+    //             HostName = "localhost"
+    //         };
 
-                await scope.ServiceProvider.GetService<IUnityOfWork>().CommitChangesAsync();
+    //         _connection = connectionFactory.CreateConnection();
+    //         _channel = _connection.CreateModel();
 
-            }
-        }
+    //         _channel.QueueDeclare(
+    //             queue: PAYMENTS_DONE_QUEUE,
+    //             durable:false,
+    //             exclusive:false,
+    //             autoDelete:false,
+    //             arguments:null);
+    //     }
 
-        private T DeserializeBytesArray<T>(byte[] byteArray)
-        {
-            var requestJson = Encoding.UTF8.GetString(byteArray);
-            return JsonSerializer.Deserialize<T>(requestJson);
-        }
+    //     protected override Task ExecuteAsync(CancellationToken stoppingToken)
+    //     {
+    //         var consumer = new EventingBasicConsumer(_channel);
+    //         SettingConsumerBehavior(consumer);
 
-        private byte[] SerializeBytesArray<T>(T model)
-        {
-            var requestJson = JsonSerializer.Serialize(model);
-            var requestJsonBytes = Encoding.UTF8.GetBytes(requestJson);
-            return requestJsonBytes;        
-        }
+    //         _channel.BasicConsume(PAYMENTS_DONE_QUEUE, false, consumer);
+    //         return Task.CompletedTask;
+    //     }
+
+    //     private void SettingConsumerBehavior(EventingBasicConsumer consumer)
+    //     {
+    //         consumer.Received += async (sender, eventArgs) =>
+    //         {
+    //             var paymentDone = DeserializeBytesArray<PaymentDoneIntegrationEvent>(eventArgs.Body.ToArray());   
+    //             await SetModelPaymentDone(paymentDone);
+    //             _channel.BasicAck(eventArgs.DeliveryTag, false);
+    //         };
+    //     }
+
+    //     private async Task SetModelPaymentDone(PaymentDoneIntegrationEvent paymentDone)
+    //     {
+    //         using(var scope = _serviceProvider.CreateScope())
+    //         {
+    //             var contractRepository = scope.ServiceProvider.GetService<IContractRepository>();
+    //             var payment = contractRepository.Query()
+    //                 .SelectMany(co=>co.Payments)
+    //                 .FirstOrDefault(pa=>pa.Id == paymentDone.PaymentId);
+
+    //             payment.Pending = 1;
+
+    //             await scope.ServiceProvider.GetService<IUnityOfWork>().CommitChangesAsync();
+
+    //         }
+    //     }
+
+    //     private T DeserializeBytesArray<T>(byte[] byteArray)
+    //     {
+    //         var requestJson = Encoding.UTF8.GetString(byteArray);
+    //         return JsonSerializer.Deserialize<T>(requestJson);
+    //     }
+
+    //     private byte[] SerializeBytesArray<T>(T model)
+    //     {
+    //         var requestJson = JsonSerializer.Serialize(model);
+    //         var requestJsonBytes = Encoding.UTF8.GetBytes(requestJson);
+    //         return requestJsonBytes;        
+    //     }
     }
 }

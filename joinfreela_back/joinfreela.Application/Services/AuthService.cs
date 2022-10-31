@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using joinfreela.Application.DTOs.Auth;
+using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Options;
 using joinfreela.Domain.Classes.Base;
@@ -69,7 +70,8 @@ namespace joinfreela.Application.Services
                                 && us.Password == loginRequest.Password);
             }
 
-            //If user is nul throw NotFound 
+            if(user is null) 
+                throw new NotFoundException("Usuário não encontrado"); 
             
             return new List<Claim>{
                 new Claim(ClaimTypes.Sid,user.Id.ToString()),

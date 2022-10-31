@@ -31,7 +31,7 @@ namespace joinfreela.Application.Services
             if( ! validationResult.IsValid)
                 throw new BadRequestException(validationResult);
             
-             var skill = _mapper.Map<Skill>(request);
+            var skill = _mapper.Map<Skill>(request);
             
             await _skillRepository.RegisterAsync(skill);
             //Interaction
