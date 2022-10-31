@@ -52,7 +52,7 @@ namespace joinfreela.API.Controllers
             return Ok(await _contractService.DeleteAsync(id));
         }
     
-        [HttpPost("/{contractId:int/payment}")]
+        [HttpPost("/{contractId:int}/payment")]
         public async Task<ActionResult<PaymentResponse>> RegisterPaymentAsync(int contractId,[FromBody] PaymentRequest request)
         {
             request.ContractId = contractId ;
