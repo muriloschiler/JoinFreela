@@ -1,5 +1,4 @@
 using AutoMapper;
-using joinfreela.Application.DTOs.Common.Base;
 using joinfreela.Application.DTOs.Contract;
 using joinfreela.Application.DTOs.Enumerations;
 using joinfreela.Application.DTOs.Freelancer;
@@ -10,7 +9,6 @@ using joinfreela.Application.DTOs.Payment;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Application.Interfaces.Services;
-using joinfreela.Domain.Classes.Base;
 using joinfreela.Domain.Models;
 using joinfreela.Domain.Models.Enumerations;
 
@@ -35,7 +33,5 @@ namespace joinfreela.Application.Mappers
             CreateMap<UserSkillRequest,UserSkill>()
                 .ForMember(usk=>usk.FreelancerId,m=>m.MapFrom(req=> _authService.AuthUser.Id));
         }   
-        public RequestToDomainProfile()
-        {}    
     }
 }

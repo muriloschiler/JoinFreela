@@ -38,5 +38,4 @@ void ConfigureServices(IServiceCollection services, ConfigurationManager configu
     services.AddHttpContextAccessor();
     
     services.AddHostedService<PaymentDoneConsumer>();
-    services.AddAutoMapper(typeof(RequestToDomainProfile),typeof(DomainToResponseProfile));
 }

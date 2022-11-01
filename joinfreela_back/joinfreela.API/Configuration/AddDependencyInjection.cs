@@ -1,6 +1,8 @@
 using System.Reflection;
+using AutoMapper;
 using FluentValidation.AspNetCore;
 using joinfreela.Application.Interfaces.Services;
+using joinfreela.Application.Mappers;
 using joinfreela.Application.Services;
 using joinfreela.Application.Utils;
 using joinfreela.Application.Validators;
@@ -40,6 +42,12 @@ namespace joinfreela.API.Configuration
                     asr => !(asr.ValidatorType.GetCustomAttribute<IgnoreInjectionAttribute>()?.Ignore ?? false)
                 );
             });
+
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new RequestToDomainProfile(provider.GetService<IAuthService>()));
+                cfg.AddProfile(new DomainToResponseProfile());
+            }).CreateMapper());
 
             return services;     
         }
