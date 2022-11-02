@@ -28,7 +28,6 @@ app.Run();
 void ConfigureConfiguration(IServiceCollection services,ConfigurationManager configuration)
 {
     services.Configure<JWTOptions>(configuration.GetSection("JWTOptions"));
-    services.Configure<URLPaymentsAPI>(configuration.GetSection("URLPaymentsAPI"));
 };
 
 void ConfigureServices(IServiceCollection services, ConfigurationManager configuration){

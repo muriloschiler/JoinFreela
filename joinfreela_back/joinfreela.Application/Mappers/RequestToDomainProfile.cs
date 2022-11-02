@@ -24,14 +24,15 @@ namespace joinfreela.Application.Mappers
             CreateMap<ProjectRequest,Project>();
             CreateMap<SkillRequest,Skill>();
             CreateMap<PaymentRequest,Payment>();
-            CreateMap<FreelancerRequest,Freelancer>();
+            CreateMap<FreelancerRequest,Freelancer>()
+                .ForMember(fr=>fr.Skills, m=>m.MapFrom(
+                    req=> req.Skills.Select(sk=> new UserSkill{FreelancerId = _authService.AuthUser.Id , SkillId = sk })
+                ));
+
             CreateMap<SeniorityViewModel,Seniority>();
             
             CreateMap<NominationRequest,Nomination>()
                 .ForMember(no=>no.FreelancerId, m=>m.MapFrom(req=> _authService.AuthUser.Id));
-            
-            CreateMap<UserSkillRequest,UserSkill>()
-                .ForMember(usk=>usk.FreelancerId,m=>m.MapFrom(req=> _authService.AuthUser.Id));
         }   
     }
 }
