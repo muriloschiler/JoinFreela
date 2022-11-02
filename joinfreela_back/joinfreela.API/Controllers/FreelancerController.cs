@@ -2,6 +2,7 @@ using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Freelancer;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Parameters;
+using joinfreela.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ namespace joinfreela.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<FreelancerResponse>> RegisterAsync(FreelancerRequest freelancerRequest)
         {
-            return Ok(await _freelancerService.RegisterAsync(freelancerRequest));   
+            return Ok(await _freelancerService.RegisterAsync(freelancerRequest));
         }
 
         [HttpPut("{id:int}")]

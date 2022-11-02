@@ -11,8 +11,7 @@ namespace joinfreela.Application.Validators
         public FreelancerRequestValidator(ISkillRepository _skillRepository)
         {
             RuleForEach(fr=>fr.Skills)
-                .MustAsync(async (skillId,CancellationToken)=>
-                    await _skillRepository.Query().AnyAsync(sk=>sk.Id==skillId))
+                .Must(skillId => _skillRepository.Query().Any(sk=>sk.Id==skillId))
                 .WithMessage("A Skill informada não existe");
         }
     }

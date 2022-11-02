@@ -26,11 +26,13 @@ namespace joinfreela.Application.Mappers
             CreateMap<PaymentRequest,Payment>();
             CreateMap<FreelancerRequest,Freelancer>()
                 .ForMember(fr=>fr.Skills, m=>m.MapFrom(
-                    req=> req.Skills.Select(sk=> new UserSkill{FreelancerId = _authService.AuthUser.Id , SkillId = sk })
+                    req=> _authService.AuthUser != null ? 
+                        req.Skills.Select(skId=> new UserSkill{FreelancerId = _authService.AuthUser.Id , SkillId = skId }) 
+                        : new List<UserSkill>()
                 ));
-
+                
             CreateMap<SeniorityViewModel,Seniority>();
-            
+
             CreateMap<NominationRequest,Nomination>()
                 .ForMember(no=>no.FreelancerId, m=>m.MapFrom(req=> _authService.AuthUser.Id));
         }   

@@ -2,6 +2,6 @@ namespace joinfreela.Domain.Interfaces.UnitOfWork
 {
     public interface IUnityOfWork
     {
-        public Task CommitChangesAsync(); 
+        public Task<bool> CommitChangesAsync(); 
     }
 }

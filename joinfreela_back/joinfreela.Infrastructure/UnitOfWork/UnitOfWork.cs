@@ -12,9 +12,9 @@ namespace joinfreela.Infrastructure.UnitOfWork
             _joinFreelaDbContext = joinFreelaDbContext;
         }
 
-        public async Task CommitChangesAsync()
+        public async Task<bool> CommitChangesAsync()
         {
-            await _joinFreelaDbContext.SaveChangesAsync();
+            return await _joinFreelaDbContext.SaveChangesAsync() >= 0 ;
         }
     }
 }
