@@ -22,6 +22,7 @@ namespace joinfreela.Application.Services
             _freelancerRequestvalidator = freelancerRequestvalidator;
             _mapper=mapper;
             _freelancerRepository=freelancerRepository;
+            _unityOfWork = unityOfWork;
         }
         
         public override async Task<FreelancerResponse> RegisterAsync(FreelancerRequest request)
@@ -30,12 +31,12 @@ namespace joinfreela.Application.Services
             if( ! validationResult.IsValid)
                 throw new BadRequestException(validationResult);
             
-            
+
             var freelancer = _mapper.Map<Freelancer>(request);
             await _freelancerRepository.RegisterAsync(freelancer);
             //Interaction
             await _unityOfWork.CommitChangesAsync();
-            freelancer.Skills = request.Skills.Select(skId=> new UserSkill{FreelancerId = freelancer.Id , SkillId = skId });
+            freelancer.Skills = request.Skills.Select(skId=> new UserSkill{FreelancerId = freelancer.Id , SkillId = skId }).ToList();
             await _unityOfWork.CommitChangesAsync();
 
             return _mapper.Map<FreelancerResponse>(freelancer);
