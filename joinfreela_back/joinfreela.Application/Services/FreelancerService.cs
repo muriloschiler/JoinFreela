@@ -42,5 +42,7 @@ namespace joinfreela.Application.Services
             return _mapper.Map<FreelancerResponse>(freelancer);
 
         }
+    
+        
     }
 }
