@@ -15,34 +15,66 @@ namespace joinfreela.Application.Services
         private IValidator<FreelancerRequest> _freelancerRequestvalidator {get; set; }
         private IMapper _mapper { get; set; }
         public IFreelancerRepository _freelancerRepository { get; set; }
+        public ISkillRepository _skillRepository { get; set; }
         public IUnityOfWork _unityOfWork { get; set; }
-        public FreelancerService(IAuthService authService,IFreelancerRepository freelancerRepository, IMapper mapper, IValidator<FreelancerRequest> freelancerRequestvalidator, IUnityOfWork unityOfWork) 
+        public FreelancerService(
+            IAuthService authService,
+            IFreelancerRepository freelancerRepository, 
+            IMapper mapper, 
+            IValidator<FreelancerRequest> freelancerRequestvalidator, 
+            IUnityOfWork unityOfWork,
+            ISkillRepository skillRepository) 
         : base(freelancerRepository, mapper, freelancerRequestvalidator, unityOfWork)
         {
             _freelancerRequestvalidator = freelancerRequestvalidator;
             _mapper=mapper;
             _freelancerRepository=freelancerRepository;
+            _skillRepository=skillRepository;
             _unityOfWork = unityOfWork;
         }
         
         public override async Task<FreelancerResponse> RegisterAsync(FreelancerRequest request)
         {
             var validationResult = await _freelancerRequestvalidator.ValidateAsync(request);
-            if( ! validationResult.IsValid)
+            if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
             
-
-            var freelancer = _mapper.Map<Freelancer>(request);
-            await _freelancerRepository.RegisterAsync(freelancer);
-            //Interaction
-            await _unityOfWork.CommitChangesAsync();
-            freelancer.Skills = request.Skills.Select(usk=> new UserSkill{FreelancerId = freelancer.Id , SkillId = usk.SkillId,Experience = usk.Experience }).ToList();
-            await _unityOfWork.CommitChangesAsync();
+            var freelancer = await RegisterFreelancerAsync(request);
+            await RegisterUserSkillAsync(request, freelancer);        
 
             return _mapper.Map<FreelancerResponse>(freelancer);
 
         }
-    
-        
+
+        private async Task<Freelancer> RegisterFreelancerAsync(FreelancerRequest request)
+        {
+            var freelancer = _mapper.Map<Freelancer>(request);
+            await _freelancerRepository.RegisterAsync(freelancer);
+            //Interaction
+            await _unityOfWork.CommitChangesAsync();
+            return freelancer;
+        }
+
+        private async Task RegisterUserSkillAsync(FreelancerRequest request,Freelancer freelancer)
+        {
+
+            List<UserSkill> userSkillsList = new List<UserSkill>();
+
+            foreach(var skillRequest in request.Skills)
+            {
+                userSkillsList.Add(
+                    new UserSkill { 
+                    FreelancerId = freelancer.Id, 
+                    SkillId = skillRequest.SkillId, 
+                    Experience = skillRequest.Experience,
+                    Skill = await _skillRepository.GetByIdAsync(skillRequest.SkillId)
+                    }
+                ); 
+            }
+
+            freelancer.Skills = userSkillsList;
+            await _unityOfWork.CommitChangesAsync();
+        }
+
     }
 }

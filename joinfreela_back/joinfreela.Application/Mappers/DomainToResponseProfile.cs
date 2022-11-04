@@ -24,7 +24,9 @@ namespace joinfreela.Application.Mappers
             CreateMap<Skill,SkillResponse>();
             CreateMap<Payment,PaymentResponse>();
             CreateMap<Freelancer,FreelancerResponse>();
-            CreateMap<UserSkill,UserSkillResponse>();
+            CreateMap<UserSkill,UserSkillResponse>()
+                .ForMember(usr=>usr.Id,m=>m.MapFrom(us=>us.SkillId))
+                .ForMember(usr=>usr.Name,m=>m.MapFrom(us=>us.Skill.Name));
             CreateMap<Seniority,SeniorityViewModel>();
             CreateMap<Nomination,NominationResponse>();
             CreateMap<UserSkill,SkillResponse>();
