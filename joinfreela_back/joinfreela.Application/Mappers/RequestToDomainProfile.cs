@@ -27,7 +27,7 @@ namespace joinfreela.Application.Mappers
             CreateMap<FreelancerRequest,Freelancer>()
                 .ForMember(fr=>fr.Skills, m=>m.MapFrom(
                     req=> _authService.AuthUser != null ? 
-                        req.Skills.Select(skId=> new UserSkill{FreelancerId = _authService.AuthUser.Id , SkillId = skId }) 
+                        req.Skills.Select(ukr=> new UserSkill{FreelancerId = _authService.AuthUser.Id , SkillId = ukr.SkillId,Experience = ukr.Experience }) 
                         : new List<UserSkill>()
                 ));
                 

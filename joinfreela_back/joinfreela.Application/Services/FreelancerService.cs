@@ -36,7 +36,7 @@ namespace joinfreela.Application.Services
             await _freelancerRepository.RegisterAsync(freelancer);
             //Interaction
             await _unityOfWork.CommitChangesAsync();
-            freelancer.Skills = request.Skills.Select(skId=> new UserSkill{FreelancerId = freelancer.Id , SkillId = skId }).ToList();
+            freelancer.Skills = request.Skills.Select(usk=> new UserSkill{FreelancerId = freelancer.Id , SkillId = usk.SkillId,Experience = usk.Experience }).ToList();
             await _unityOfWork.CommitChangesAsync();
 
             return _mapper.Map<FreelancerResponse>(freelancer);

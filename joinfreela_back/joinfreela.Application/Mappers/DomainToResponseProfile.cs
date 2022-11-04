@@ -24,6 +24,7 @@ namespace joinfreela.Application.Mappers
             CreateMap<Skill,SkillResponse>();
             CreateMap<Payment,PaymentResponse>();
             CreateMap<Freelancer,FreelancerResponse>();
+            CreateMap<UserSkill,UserSkillResponse>();
             CreateMap<Seniority,SeniorityViewModel>();
             CreateMap<Nomination,NominationResponse>();
             CreateMap<UserSkill,SkillResponse>();
