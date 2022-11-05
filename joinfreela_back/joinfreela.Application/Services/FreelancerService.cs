@@ -7,6 +7,7 @@ using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
 using joinfreela.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace joinfreela.Application.Services
 {
@@ -43,7 +44,28 @@ namespace joinfreela.Application.Services
             await RegisterUserSkillAsync(request, freelancer);        
 
             return _mapper.Map<FreelancerResponse>(freelancer);
+        }
 
+        public override async Task<FreelancerResponse> UpdateAsync(int id,FreelancerRequest request)
+        {
+            _freelancerRepository.AddPreQuery(query=> query.Include(fr=>fr.Skills).ThenInclude(us=>us.Skill));
+
+            var validationResult = await _freelancerRequestvalidator.ValidateAsync(request);
+            if ( ! validationResult.IsValid)
+                throw new BadRequestException(validationResult);
+            
+            var freelancer = await _freelancerRepository.GetByIdAsync(id);
+            if (freelancer is null)
+                throw new NotFoundException("O id informado não existe");
+            
+            _mapper.Map<FreelancerRequest,Freelancer>(request,freelancer);
+            await _freelancerRepository.RegisterAsync(freelancer);
+            //interaction
+            await _unityOfWork.CommitChangesAsync();
+            
+            return _mapper.Map<FreelancerResponse>(freelancer);
+                
+            
         }
 
         private async Task<Freelancer> RegisterFreelancerAsync(FreelancerRequest request)
