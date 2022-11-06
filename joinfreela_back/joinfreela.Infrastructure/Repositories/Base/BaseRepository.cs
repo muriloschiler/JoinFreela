@@ -35,7 +35,7 @@ namespace joinfreela.Infrastructure.Repositories.Base
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await Query().FirstAsync(t=>t.Id == id);
+            return await Query().FirstOrDefaultAsync(t=>t.Id == id);
         }
 
         public Task<T> RegisterAsync(T entity)

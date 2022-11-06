@@ -31,6 +31,5 @@ namespace joinfreela.Application.Mappers
             CreateMap<Nomination,NominationResponse>();
             CreateMap<UserSkill,SkillResponse>();
         }
-        
     }
 }

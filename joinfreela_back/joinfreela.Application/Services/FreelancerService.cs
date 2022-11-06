@@ -59,7 +59,7 @@ namespace joinfreela.Application.Services
                 throw new NotFoundException("O id informado não existe");
             
             _mapper.Map<FreelancerRequest,Freelancer>(request,freelancer);
-            await _freelancerRepository.RegisterAsync(freelancer);
+            await _freelancerRepository.UpdateAsync(freelancer);
             //interaction
             await _unityOfWork.CommitChangesAsync();
             
