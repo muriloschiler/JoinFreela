@@ -40,8 +40,8 @@ namespace joinfreela.Application.Services
             if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
             
-            var freelancer = await RegisterFreelancerAsync(request);
-            await RegisterUserSkillAsync(request, freelancer);        
+            var freelancer = await SaveFreelancerAsync(request);
+            await SaveUserSkillAsync(request, freelancer);        
 
             return _mapper.Map<FreelancerResponse>(freelancer);
         }
@@ -68,7 +68,7 @@ namespace joinfreela.Application.Services
             
         }
 
-        private async Task<Freelancer> RegisterFreelancerAsync(FreelancerRequest request)
+        private async Task<Freelancer> SaveFreelancerAsync(FreelancerRequest request)
         {
             var freelancer = _mapper.Map<Freelancer>(request);
             await _freelancerRepository.RegisterAsync(freelancer);
@@ -77,7 +77,7 @@ namespace joinfreela.Application.Services
             return freelancer;
         }
 
-        private async Task RegisterUserSkillAsync(FreelancerRequest request,Freelancer freelancer)
+        private async Task SaveUserSkillAsync(FreelancerRequest request,Freelancer freelancer)
         {
 
             List<UserSkill> userSkillsList = new List<UserSkill>();

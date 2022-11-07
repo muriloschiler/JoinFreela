@@ -1,16 +1,14 @@
-using joinfreela.Application.Constants;
 using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Skill;
 using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Parameters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace joinfreela.API.Controllers
 {
     [Route("api/v1/admin/[controller]")]
     [ApiController]
-    //[Authorize(Roles = UserRoles.Admin)]
+    // [Authorize(Roles = UserRoles.Admin)]
     public class SkillController:ControllerBase
     {
         public ISkillService _skillService { get; set; }

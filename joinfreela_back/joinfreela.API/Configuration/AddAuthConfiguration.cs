@@ -35,6 +35,7 @@ namespace joinfreela.API.Configuration
             {
                 opt.AddPolicy(UserRoles.Owner, policy => policy.RequireRole(UserRoles.Owner));
                 opt.AddPolicy(UserRoles.Freelancer, policy => policy.RequireRole(UserRoles.Freelancer));
+                opt.AddPolicy(UserRoles.Admin, policy => policy.RequireRole(UserRoles.Admin));
             });
 
             return services;

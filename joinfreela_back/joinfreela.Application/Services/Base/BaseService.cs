@@ -70,7 +70,7 @@ namespace joinfreela.Application.Services.Base
                 
             var model = await _repository.GetByIdAsync(id);
             if (model is null)
-                throw new NotFoundException($"{nameof(Tmodel)} não existe");
+                throw new NotFoundException($"{nameof(model)} não existe");
 
             _mapper.Map<Trequest,Tmodel>(request,model);
             await _repository.UpdateAsync(model);

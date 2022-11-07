@@ -7,6 +7,7 @@ using joinfreela.Application.Interfaces.Services;
 using joinfreela.Application.Options;
 using joinfreela.Domain.Classes.Base;
 using joinfreela.Domain.Interfaces.Repositories;
+using joinfreela.Domain.Interfaces.Repositories.Base;
 using joinfreela.Domain.Models.Auth;
 using joinfreela.Domain.Models.Base;
 using joinfreela.Domain.Models.Enumerations;
@@ -19,11 +20,11 @@ namespace joinfreela.Application.Services
 {
     public class AuthService : IAuthService
     {
-        public IFreelancerRepository _freelancerRepository { get; set; }
-        public IOwnerRepository _ownerRepository { get; set; }
+        private IFreelancerRepository _freelancerRepository;
+        private IOwnerRepository _ownerRepository; 
         private readonly JWTOptions _jwtOptions; 
         public AuthUser AuthUser { get; set; }
-           
+        
         public AuthService
         (   IFreelancerRepository freelancerRepository, 
             IOwnerRepository ownerRepository,

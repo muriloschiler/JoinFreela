@@ -47,7 +47,7 @@ namespace joinfreela.Infrastructure.Repositories.Base
 
         public Task<T> UpdateAsync(T entity)
         {
-            entity.UpdateAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
             _dbSet.Update(entity);
             return Task.FromResult(entity);
         }

@@ -11,7 +11,7 @@ namespace joinfreela.Infrastructure.Data.Configurations.Base
         {
             builder.HasKey(re=>re.Id);
             builder.Property(re=>re.CreatedAt).HasColumnType("Date");
-            builder.Property(re=>re.UpdateAt).HasColumnType("Date");
+            builder.Property(re=>re.UpdatedAt).HasColumnType("Date");
             ConfigureOtherProperties(builder);
         }
 
