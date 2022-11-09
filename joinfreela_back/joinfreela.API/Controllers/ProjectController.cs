@@ -59,10 +59,16 @@ namespace joinfreela.API.Controllers
             return Ok(await _projectService.AddJobAsync(projectId,request));
         }
 
-        [HttpPost("{projectId:int}/job/{JobId:int}")]
-        public async Task<ActionResult<JobResponse>> UpdateJobAsync(int projectId, int JobId,[FromBody] JobRequest request)
+        [HttpPut("{projectId:int}/job/{jobId:int}")]
+        public async Task<ActionResult<JobResponse>> UpdateJobAsync(int projectId, int jobId,[FromBody] JobRequest request)
         {
-            return Ok(await _projectService.UpdateJobAsync(projectId, JobId,request));
+            return Ok(await _projectService.UpdateJobAsync(projectId, jobId,request));
+        }
+    
+        [HttpDelete("{projectId:int}/job/{JobId:int}")]
+        public async Task<ActionResult<JobResponse>> DeleteJobAsync(int projectId,int jobId)
+        {
+            return Ok(await _projectService.DeleteJobAsync(projectId,jobId));
         }
     }
 }

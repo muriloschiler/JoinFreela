@@ -32,7 +32,11 @@ namespace joinfreela.Application.Services
             _unityOfWork = unityOfWork;
             _authService=authService;
 
-            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Jobs));
+            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Owner));
+            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Jobs).ThenInclude(jo=>jo.Seniority));
+            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Jobs).ThenInclude(jo=>jo.Nominations));
+            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Jobs).ThenInclude(jo=>jo.Contract));
+   
         }
 
         public override async Task<ProjectResponse> UpdateAsync(int id, ProjectRequest request)
@@ -41,12 +45,7 @@ namespace joinfreela.Application.Services
             if(!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
 
-            var project = await _projectRepository.GetByIdAsync(id);
-            if (project is null)
-                throw new NotFoundException($"{nameof(Project)} não existe");
-            
-            if(project.OwnerId != _authService.AuthUser.Id)
-                throw new NotAuthorizedException();
+            var project = await ValidationsForProject(id);
             
             _mapper.Map<ProjectRequest,Project>(request,project);
             await _projectRepository.UpdateAsync(project);
@@ -57,12 +56,7 @@ namespace joinfreela.Application.Services
         } 
         public override async Task<ProjectResponse> DeleteAsync(int id)
         {
-            var project = await _projectRepository.GetByIdAsync(id);
-            if (project is null)
-                throw new NotFoundException($"{nameof(Project)} não existe");
-            
-            if(project.OwnerId != _authService.AuthUser.Id)
-                throw new NotAuthorizedException();
+            var project = await ValidationsForProject(id);
             
             await _projectRepository.DeleteAsync(project);
             //Interaction
@@ -72,8 +66,11 @@ namespace joinfreela.Application.Services
 
         public async Task<JobResponse> AddJobAsync(int projectId, JobRequest request)
         {
+            var validationResult = await _jobRequestvalidator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+                throw new BadRequestException(validationResult);
             
-            var project = await ValidationsForProject(projectId, request);
+            var project = await ValidationsForProject(projectId);
 
             var job = _mapper.Map<Job>(request);
             project.Jobs.Add(job);
@@ -85,8 +82,11 @@ namespace joinfreela.Application.Services
         
         public async Task<JobResponse> UpdateJobAsync(int projectId, int jobId, JobRequest request)
         {
-            var project = await ValidationsForProject(projectId, request);
-            
+            var validationResult = await _jobRequestvalidator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+                throw new BadRequestException(validationResult);
+                
+            var project = await ValidationsForProject(projectId);
             var job = project.Jobs.FirstOrDefault(jo=>jo.Id == jobId); 
             if( job is null)
                 throw new BadRequestException("O projeto informado não contém a vaga informada");
@@ -98,14 +98,22 @@ namespace joinfreela.Application.Services
             return _mapper.Map<JobResponse>(job);
         }
 
-        private async Task<Project> ValidationsForProject(int projectId, JobRequest request)
+        public async Task<JobResponse> DeleteJobAsync(int projectId, int jobId)
         {
-            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Owner));
+            var project = await ValidationsForProject(projectId);
+            var job = project.Jobs.FirstOrDefault(jo=>jo.Id == jobId); 
+            if( job is null)
+                throw new BadRequestException("O projeto informado não contém a vaga informada");
             
-            var validationResult = await _jobRequestvalidator.ValidateAsync(request);
-            if (!validationResult.IsValid)
-                throw new BadRequestException(validationResult);
-
+            project.Jobs.Remove(job);
+            await _projectRepository.UpdateAsync(project);
+            //interaction
+            await _unityOfWork.CommitChangesAsync();
+            return _mapper.Map<JobResponse>(job);
+        }
+        
+        private async Task<Project> ValidationsForProject(int projectId)
+        {
             var project = await _projectRepository.GetByIdAsync(projectId);
 
             if (project is null)
@@ -114,10 +122,11 @@ namespace joinfreela.Application.Services
             if (project.OwnerId != _authService.AuthUser.Id)
                 throw new NotAuthorizedException();
 
-            if(project.Active != 0)
+            if (project.Active != 0)
                 throw new BadRequestException("Projeto não se encontra mais ativo");
-        
+
             return project;
         }
+
     }
 }

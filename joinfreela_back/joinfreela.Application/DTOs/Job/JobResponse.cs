@@ -12,9 +12,9 @@ namespace joinfreela.Application.DTOs.Job
         public string Description { get; set; }
         public decimal Salary { get; set; }
         public int Open { get; set; }
-        //public SeniorityViewModel Seniority { get; set; }
-        //public IEnumerable<NominationResponse> Nominations { get; set; }
-        //public ContractResponse Contract { get; set; }
+        public SeniorityViewModel Seniority { get; set; }
+        public IEnumerable<NominationResponse> Nominations { get; set; }
+        public ContractResponse Contract { get; set; }
         
     }
 }
