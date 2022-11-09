@@ -13,5 +13,6 @@ namespace joinfreela.Application.Interfaces.Services
         Task<JobResponse> AddJobAsync(int projectId, JobRequest request);
         Task<JobResponse> UpdateJobAsync(int projectId,int jobId, JobRequest request);
         Task<JobResponse> DeleteJobAsync(int projectId, int jobId);
+        Task<PaginationResponse<JobResponse>> GetJobsAsync(JobParameters parameters);
     }
 }

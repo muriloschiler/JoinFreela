@@ -1,10 +1,13 @@
 
 using AutoMapper;
 using FluentValidation;
+using joinfreela.Application.Constants;
+using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Job;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
+using joinfreela.Application.Parameters;
 using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
@@ -64,6 +67,22 @@ namespace joinfreela.Application.Services
             return _mapper.Map<ProjectResponse>(project);
         }
 
+        public async Task<PaginationResponse<JobResponse>> GetJobsAsync(JobParameters parameters)
+        {
+            ProjectService
+
+            if ( parameters.Direction == DirectionQueryParameters.Descendant)
+                _projectRepository.AddPreQuery(query=>query.SelectMany(pr=>pr.Jobs) .OrderByDescending(pr=> pr.GetType().GetProperty(parameters.Order))); 
+            else
+                _projectRepository.AddPreQuery(query=>query.OrderBy(pr=> pr.GetType().GetProperty(parameters.Order)));                                 
+
+            return new PaginationResponse<JobResponse>{
+                Skip = parameters.Skip,
+                Take = parameters.Take,
+                Count = await _projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter()).CountAsync(),
+                Data = _mapper.Map<IEnumerable<JobResponse>>(_projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter())),
+            };
+        }        
         public async Task<JobResponse> AddJobAsync(int projectId, JobRequest request)
         {
             var validationResult = await _jobRequestvalidator.ValidateAsync(request);
