@@ -68,20 +68,19 @@ namespace joinfreela.Application.Services
         }
 
         public async Task<PaginationResponse<JobResponse>> GetJobsAsync(JobParameters parameters)
-        {
-            ProjectService
+        { 
+            throw new NotImplementedException();
+        //     if ( parameters.Direction == DirectionQueryParameters.Descendant)
+        //         _projectRepository.AddPreQuery(query=>query.SelectMany(pr=>pr.Jobs) .OrderByDescending(pr=> pr.GetType().GetProperty(parameters.Order))); 
+        //     else
+        //         _projectRepository.AddPreQuery(query=>query.OrderBy(pr=> pr.GetType().GetProperty(parameters.Order)));                                 
 
-            if ( parameters.Direction == DirectionQueryParameters.Descendant)
-                _projectRepository.AddPreQuery(query=>query.SelectMany(pr=>pr.Jobs) .OrderByDescending(pr=> pr.GetType().GetProperty(parameters.Order))); 
-            else
-                _projectRepository.AddPreQuery(query=>query.OrderBy(pr=> pr.GetType().GetProperty(parameters.Order)));                                 
-
-            return new PaginationResponse<JobResponse>{
-                Skip = parameters.Skip,
-                Take = parameters.Take,
-                Count = await _projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter()).CountAsync(),
-                Data = _mapper.Map<IEnumerable<JobResponse>>(_projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter())),
-            };
+        //     return new PaginationResponse<JobResponse>{
+        //         Skip = parameters.Skip,
+        //         Take = parameters.Take,
+        //         Count = await _projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter()).CountAsync(),
+        //         Data = _mapper.Map<IEnumerable<JobResponse>>(_projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter())),
+        //     };
         }        
         public async Task<JobResponse> AddJobAsync(int projectId, JobRequest request)
         {
@@ -131,12 +130,23 @@ namespace joinfreela.Application.Services
             return _mapper.Map<JobResponse>(job);
         }
         
+        public async Task<JobResponse> GetJobById(int projectId, int jobId)
+        {
+            var project = await ValidationsForProject(projectId);
+            var job = project.Jobs.FirstOrDefault(jo=>jo.Id == jobId);
+            if ( job is null)
+                throw new NotFoundException($"A Vaga informada não existe");
+            
+            return _mapper.Map<JobResponse>(job);
+
+
+        }
         private async Task<Project> ValidationsForProject(int projectId)
         {
             var project = await _projectRepository.GetByIdAsync(projectId);
 
             if (project is null)
-                throw new NotFoundException($"{nameof(Project)} não existe");
+                throw new NotFoundException($"O Projeto informado não existe");
 
             if (project.OwnerId != _authService.AuthUser.Id)
                 throw new NotAuthorizedException();
