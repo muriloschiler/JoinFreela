@@ -21,7 +21,10 @@ namespace joinfreela.Application.Mappers
             CreateMap<ContractRequest,Contract>();
             CreateMap<JobRequest,Job>();
             CreateMap<OwnerRequest,Owner>();
-            CreateMap<ProjectRequest,Project>();
+            CreateMap<ProjectRequest,Project>()
+                .ForMember(pr=>pr.OwnerId,map=>map.MapFrom(
+                    req=> _authService.AuthUser.Id
+                ));
             CreateMap<SkillRequest,Skill>();
             CreateMap<PaymentRequest,Payment>();
             CreateMap<FreelancerRequest,Freelancer>()

@@ -1,3 +1,4 @@
+using joinfreela.Application.Constants;
 using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Owner;
 using joinfreela.Application.Interfaces.Services;
@@ -9,7 +10,7 @@ namespace joinfreela.API.Controllers
 {
     [ApiController]
     [Route("api/v1/{controller}")]
-    [Authorize]
+    [Authorize(Roles = UserRoles.Owner)]
     public class OwnerController : ControllerBase
     {
         public IOwnerService _ownerService { get; set; }

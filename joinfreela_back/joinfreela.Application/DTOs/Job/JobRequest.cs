@@ -6,6 +6,5 @@ using joinfreela.Application.DTOs.Common.Base;namespace joinfreela.Application.D
         public string Description { get; set; }
         public decimal Salary { get; set; }
         public int SeniorityId { get; set; }
-        public int ProjectId { get; set; }   
     }
 }

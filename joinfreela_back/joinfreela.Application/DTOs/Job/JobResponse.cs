@@ -6,15 +6,15 @@ using joinfreela.Application.DTOs.Project;
 
 namespace joinfreela.Application.DTOs.Job
 {
-    public class JobResponse:RegisterResponse
+    public class JobResponse : RegisterResponse
     {
         public string Title { get; set; }
-        public int Description { get; set; }
+        public string Description { get; set; }
         public decimal Salary { get; set; }
-        public SeniorityViewModel Seniority { get; set; }
-        public ProjectResponse Project { get; set; }
-        public ContractResponse Contract { get; set; }
-        public IEnumerable<NominationResponse> Nominations { get; set; }
+        public int Open { get; set; }
+        //public SeniorityViewModel Seniority { get; set; }
+        //public IEnumerable<NominationResponse> Nominations { get; set; }
+        //public ContractResponse Contract { get; set; }
         
     }
 }

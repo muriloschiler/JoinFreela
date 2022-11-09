@@ -8,7 +8,5 @@ namespace joinfreela.Application.DTOs.Freelancer
     public class FreelancerResponse: UserResponse
     {
         public IEnumerable<UserSkillResponse> Skills  { get; set; }
-        public IEnumerable<NominationResponse> Nominations { get; set; }
-        public IEnumerable<ContractResponse> Contracts { get; set; }
     }
 }

@@ -25,16 +25,6 @@ namespace joinfreela.Application.Validators
             RuleFor(jr=>jr.SeniorityId)
                 .Must(se=> Enumeration.GetAll<Seniority>().Any(se=>se.Id == se.Id))
                 .WithMessage("O tipo de senioridade está inválido");
-
-            RuleFor(jr=>jr.ProjectId)
-                .MustAsync(async (projectId,CancellationToken)=>
-                    await _projectRepository.Query().AnyAsync(pr=> pr.Id == projectId))
-                .WithMessage("Projeto não encontrado");
-
-            RuleFor(jr=>jr.ProjectId)
-                .MustAsync(async (projectId,CancellationToken)=>
-                    await _projectRepository.Query().AnyAsync(pr=>pr.Id == projectId && pr.Active==0))
-                .WithMessage("Projeto não se encontra mais ativo");
             
         }   
     }

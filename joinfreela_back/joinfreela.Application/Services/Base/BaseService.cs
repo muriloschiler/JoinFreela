@@ -42,7 +42,7 @@ namespace joinfreela.Application.Services.Base
         {
             var model = await _repository.GetByIdAsync(id);
             if (model is null)
-                throw new NotFoundException($"{nameof(Tmodel)} não existe");
+                throw new NotFoundException($"{nameof(model)} não existe");
             
             //Interaction
             await _unityOfWork.CommitChangesAsync();
@@ -83,7 +83,7 @@ namespace joinfreela.Application.Services.Base
         {
             var model = await _repository.GetByIdAsync(id);
             if (model is null)
-                throw new NotFoundException($"{nameof(Tmodel)} não existe");
+                throw new NotFoundException($"{nameof(model)} não existe");
             await _repository.DeleteAsync(model);
             //Interaction
             await _unityOfWork.CommitChangesAsync();

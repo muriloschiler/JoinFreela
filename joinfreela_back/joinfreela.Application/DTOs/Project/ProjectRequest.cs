@@ -1,5 +1,4 @@
 using joinfreela.Application.DTOs.Common.Base;
-using joinfreela.Application.DTOs.Job;
 
 namespace joinfreela.Application.DTOs.Project
 {

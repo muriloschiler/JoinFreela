@@ -1,4 +1,4 @@
-using System.Data.Entity;
+
 using AutoMapper;
 using FluentValidation;
 using joinfreela.Application.DTOs.Job;
@@ -9,6 +9,7 @@ using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
 using joinfreela.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace joinfreela.Application.Services
 {
@@ -71,6 +72,7 @@ namespace joinfreela.Application.Services
 
         public async Task<JobResponse> AddJobAsync(int projectId, JobRequest request)
         {
+            
             var project = await ValidationsForProject(projectId, request);
 
             var job = _mapper.Map<Job>(request);
@@ -80,7 +82,7 @@ namespace joinfreela.Application.Services
             
             return _mapper.Map<JobResponse>(job);
         }
-
+        
         public async Task<JobResponse> UpdateJobAsync(int projectId, int jobId, JobRequest request)
         {
             var project = await ValidationsForProject(projectId, request);
@@ -98,6 +100,8 @@ namespace joinfreela.Application.Services
 
         private async Task<Project> ValidationsForProject(int projectId, JobRequest request)
         {
+            _projectRepository.AddPreQuery(query => query.Include(pr=>pr.Owner));
+            
             var validationResult = await _jobRequestvalidator.ValidateAsync(request);
             if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
@@ -109,10 +113,11 @@ namespace joinfreela.Application.Services
 
             if (project.OwnerId != _authService.AuthUser.Id)
                 throw new NotAuthorizedException();
+
+            if(project.Active != 0)
+                throw new BadRequestException("Projeto não se encontra mais ativo");
         
             return project;
         }
     }
-
-
 }
