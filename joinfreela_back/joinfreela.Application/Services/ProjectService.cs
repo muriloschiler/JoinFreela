@@ -68,19 +68,15 @@ namespace joinfreela.Application.Services
         }
 
         public async Task<PaginationResponse<JobResponse>> GetJobsAsync(JobParameters parameters)
-        { 
-            throw new NotImplementedException();
-        //     if ( parameters.Direction == DirectionQueryParameters.Descendant)
-        //         _projectRepository.AddPreQuery(query=>query.SelectMany(pr=>pr.Jobs) .OrderByDescending(pr=> pr.GetType().GetProperty(parameters.Order))); 
-        //     else
-        //         _projectRepository.AddPreQuery(query=>query.OrderBy(pr=> pr.GetType().GetProperty(parameters.Order)));                                 
-
-        //     return new PaginationResponse<JobResponse>{
-        //         Skip = parameters.Skip,
-        //         Take = parameters.Take,
-        //         Count = await _projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter()).CountAsync(),
-        //         Data = _mapper.Map<IEnumerable<JobResponse>>(_projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter())),
-        //     };
+        {
+            var data =  _projectRepository.Query().SelectMany(pr=>pr.Jobs).Where(parameters.Filter()).ToList();
+            return new PaginationResponse<JobResponse>
+            {
+                Skip = parameters.Skip,
+                Take = parameters.Take,
+                Data = _mapper.Map<IEnumerable<JobResponse>>(data.Skip(parameters.Skip).Take(parameters.Take)),
+                Count = data.Count()
+            };  
         }        
         public async Task<JobResponse> AddJobAsync(int projectId, JobRequest request)
         {
