@@ -86,6 +86,7 @@ namespace joinfreela.API.Controllers
         }
     
         [HttpPost("{projectId:int}/job/{jobId:int}")]
+        [Authorize(Roles = UserRoles.Freelancer)]
         public async Task<IActionResult> RegisterNomination(int projectId, int jobId)
         {
             await _projectService.RegisterNominationAsync(projectId,jobId);

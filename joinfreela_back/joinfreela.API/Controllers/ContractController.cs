@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace joinfreela.API.Controllers
 {
-    [Route("api/v1/admin/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     [Authorize(Roles = UserRoles.Owner)]
     public class ContractController : ControllerBase

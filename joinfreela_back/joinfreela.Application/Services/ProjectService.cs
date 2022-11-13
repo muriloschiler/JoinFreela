@@ -139,9 +139,6 @@ namespace joinfreela.Application.Services
 
         public async Task RegisterNominationAsync(int projectId,int jobId)
         {
-            if(_authService.AuthUser.Role.Contains(UserRoles.Owner))
-                throw new BadRequestException("Somente freelancer podem se candidatar a uma vaga");
-
             var project = await _projectRepository.GetByIdAsync(projectId);
             if (project is null)
                 throw new NotFoundException($"O Projeto informado não existe");

@@ -51,10 +51,10 @@ namespace joinfreela.Application.Services
             _authService=authService;
             _messageBusService = messageBusService;
             
-            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Freelancer));
-            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Job).ThenInclude(jo=>jo.Nominations));
             _projectRepository.AddPreQuery(query=>query.Where(po=>po.OwnerId == _authService.AuthUser.Id));
+            _projectRepository.AddPreQuery(query=>query.Include(co=>co.Jobs).ThenInclude(jo=>jo.Nominations));
 
+            _contractRepository.AddPreQuery(query=>query.Include(co=>co.Freelancer));
             var jobsByOwner = _projectRepository.Query()    
                 .SelectMany(po=>po.Jobs);
             _contractRepository.AddPreQuery(query=>query.Where(co => jobsByOwner.Any(jo=>jo.Id == co.JobId)));
@@ -63,7 +63,7 @@ namespace joinfreela.Application.Services
         
         public override async Task<ContractResponse> RegisterAsync(ContractRequest request)
         {
-            await ValidationsRequest(request);
+            await ValidateContractRequest(request);
 
             var contract = _mapper.Map<Contract>(request);
             await _contractRepository.RegisterAsync(contract);
@@ -74,7 +74,7 @@ namespace joinfreela.Application.Services
     
         public override async Task<ContractResponse> UpdateAsync(int id ,ContractRequest request)
         {
-            await ValidationsRequest(request);
+            await ValidateContractRequest(request);
             var contract = await _contractRepository.GetByIdAsync(id);
             if(contract is null)
                 throw new NotFoundException("Contrato não encontrado");
@@ -113,14 +113,14 @@ namespace joinfreela.Application.Services
             _messageBusService.Publish(PAYMENTS_PENDING_QUEUE,paymentJsonBytes);
         }
 
-        private async Task ValidationsRequest(ContractRequest request)
+        private async Task ValidateContractRequest(ContractRequest request)
         {
             var validationResult = await _requestvalidator.ValidateAsync(request);
             if (!validationResult.IsValid)
                 throw new BadRequestException(validationResult);
 
             var job = _projectRepository.Query()
-                .SelectMany(po => po.Jobs)
+                .SelectMany(co => co.Jobs)
                 .FirstOrDefault(jo => jo.Id == request.JobId);
 
             if (job is null)
