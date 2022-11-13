@@ -46,7 +46,7 @@ namespace joinfreela.API.Controllers
             return Ok(await _contractService.UpdateAsync(id,contractRequest));
         }
     
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<ContractResponse>> DeleteAsync(int id)
         {
             return Ok(await _contractService.DeleteAsync(id));
