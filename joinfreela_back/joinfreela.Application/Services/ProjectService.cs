@@ -4,6 +4,7 @@ using FluentValidation;
 using joinfreela.Application.Constants;
 using joinfreela.Application.DTOs.Api;
 using joinfreela.Application.DTOs.Job;
+using joinfreela.Application.DTOs.Nomination;
 using joinfreela.Application.DTOs.Project;
 using joinfreela.Application.Exceptions;
 using joinfreela.Application.Interfaces.Services;
@@ -134,8 +135,33 @@ namespace joinfreela.Application.Services
                 throw new NotFoundException($"A Vaga informada não existe");
             
             return _mapper.Map<JobResponse>(job);
+        }
 
+        public async Task RegisterNominationAsync(int projectId,int jobId)
+        {
+            if(_authService.AuthUser.Role.Contains(UserRoles.Owner))
+                throw new BadRequestException("Somente freelancer podem se candidatar a uma vaga");
 
+            var project = await _projectRepository.GetByIdAsync(projectId);
+            if (project is null)
+                throw new NotFoundException($"O Projeto informado não existe");
+            if (project.Active != 0)
+                throw new BadRequestException("Projeto não se encontra mais ativo");
+            
+            var job = project.Jobs.FirstOrDefault(jo=>jo.Id==jobId);   
+            if(job is null)
+                throw new NotFoundException("O projeto não contém a vaga informada");
+            if(job.Open != 0)
+                throw new BadRequestException("A vaga informada não se encontra aberta");
+
+            job.Nominations.Add(new Nomination{
+                FreelancerId = _authService.AuthUser.Id,
+                JobId = jobId
+            });
+        
+            //interaction
+            await _projectRepository.UpdateAsync(project);
+            await _unityOfWork.CommitChangesAsync();
         }
         private async Task<Project> ValidationsForProject(int projectId)
         {
@@ -152,6 +178,5 @@ namespace joinfreela.Application.Services
 
             return project;
         }
-
     }
 }

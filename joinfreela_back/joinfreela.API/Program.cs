@@ -1,6 +1,5 @@
 using joinfreela.API.Configuration;
 using joinfreela.API.Filters;
-using joinfreela.Application.Mappers;
 using joinfreela.Application.Options;
 using joinfreela.Infrastructure.Consumers;
 

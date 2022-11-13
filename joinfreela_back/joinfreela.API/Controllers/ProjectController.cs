@@ -53,6 +53,7 @@ namespace joinfreela.API.Controllers
             return Ok(await _projectService.DeleteAsync(id));
         }
     
+        
         [HttpGet("job")]
         public async Task<ActionResult<PaginationResponse<JobResponse>>> GetJobsAsync([FromQuery] JobParameters parameters)
         {
@@ -78,10 +79,17 @@ namespace joinfreela.API.Controllers
             return Ok(await _projectService.UpdateJobAsync(projectId, jobId,request));
         }
     
-        [HttpDelete("{projectId:int}/job/{JobId:int}")]
+        [HttpDelete("{projectId:int}/job/{jobId:int}")]
         public async Task<ActionResult<JobResponse>> DeleteJobAsync(int projectId,int jobId)
         {
             return Ok(await _projectService.DeleteJobAsync(projectId,jobId));
+        }
+    
+        [HttpPost("{projectId:int}/job/{jobId:int}")]
+        public async Task<IActionResult> RegisterNomination(int projectId, int jobId)
+        {
+            await _projectService.RegisterNominationAsync(projectId,jobId);
+            return NoContent();
         }
     }
 }

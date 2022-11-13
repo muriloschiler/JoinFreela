@@ -35,9 +35,6 @@ namespace joinfreela.Application.Mappers
                 ));
                 
             CreateMap<SeniorityViewModel,Seniority>();
-
-            CreateMap<NominationRequest,Nomination>()
-                .ForMember(no=>no.FreelancerId, m=>m.MapFrom(req=> _authService.AuthUser.Id));
         }   
     }
 }
