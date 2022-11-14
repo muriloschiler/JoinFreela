@@ -13,11 +13,12 @@ namespace joinfreela.Application.Services
 {
     public class FreelancerService : BaseService<Freelancer, FreelancerRequest, FreelancerResponse>, IFreelancerService
     {
-        private IValidator<FreelancerRequest> _freelancerRequestvalidator {get; set; }
-        private IMapper _mapper { get; set; }
-        public IFreelancerRepository _freelancerRepository { get; set; }
-        public ISkillRepository _skillRepository { get; set; }
-        public IUnityOfWork _unityOfWork { get; set; }
+        private readonly IValidator<FreelancerRequest> _freelancerRequestvalidator;
+        private readonly IMapper _mapper;
+        private readonly IFreelancerRepository _freelancerRepository;
+        private readonly ISkillRepository _skillRepository ;
+        private readonly IUnityOfWork _unityOfWork;
+        public readonly IAuthService _authService;
         public FreelancerService(
             IAuthService authService,
             IFreelancerRepository freelancerRepository, 
@@ -32,6 +33,7 @@ namespace joinfreela.Application.Services
             _freelancerRepository=freelancerRepository;
             _skillRepository=skillRepository;
             _unityOfWork = unityOfWork;
+            _authService = authService;
         }
         
         public override async Task<FreelancerResponse> RegisterAsync(FreelancerRequest request)
@@ -58,14 +60,15 @@ namespace joinfreela.Application.Services
             if (freelancer is null)
                 throw new NotFoundException("O id informado não existe");
             
+            if(freelancer.Id != _authService.AuthUser.Id)
+                throw new NotAuthorizedException();
+            
             _mapper.Map<FreelancerRequest,Freelancer>(request,freelancer);
             await _freelancerRepository.UpdateAsync(freelancer);
             //interaction
             await _unityOfWork.CommitChangesAsync();
             
             return _mapper.Map<FreelancerResponse>(freelancer);
-                
-            
         }
 
         private async Task<Freelancer> SaveFreelancerAsync(FreelancerRequest request)
