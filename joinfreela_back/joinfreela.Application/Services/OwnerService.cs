@@ -7,6 +7,7 @@ using joinfreela.Application.Services.Base;
 using joinfreela.Domain.Interfaces.Repositories;
 using joinfreela.Domain.Interfaces.UnitOfWork;
 using joinfreela.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace joinfreela.Application.Services
 {
@@ -24,15 +25,16 @@ namespace joinfreela.Application.Services
             _authService=authService;
             _authService = authService;
             _unityOfWork = unityOfWork;
+            _mapper = mapper;
         }
 
         public override async Task<OwnerResponse> UpdateAsync(int id , OwnerRequest request)
         {
+            var owner = await _ownerRepository.GetByIdAsync(id);
+            _ownerRepository.AddPreQuery(query=> query.Where(ow=>ow.Id != _authService.AuthUser.Id));
             var validationResult = await _requestValidator.ValidateAsync(request);
             if ( ! validationResult.IsValid)
                 throw new BadRequestException(validationResult);
-            
-            var owner = await _ownerRepository.GetByIdAsync(id);
             if (owner is null)
                 throw new NotFoundException("Usuário não encontrado");
             if (owner.Id != _authService.AuthUser.Id)

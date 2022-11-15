@@ -3,6 +3,6 @@ using joinfreela.Domain.Models;
 
 namespace joinfreela.Domain.Interfaces.Repositories
 {
-    public interface ISkillRepository:IBaseRepository<Skill>
+    public interface ISkillRepository: IBaseRepository<Skill>
     {}
 }

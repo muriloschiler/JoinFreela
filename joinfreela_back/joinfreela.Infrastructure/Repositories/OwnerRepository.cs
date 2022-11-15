@@ -1,5 +1,4 @@
 using joinfreela.Domain.Interfaces.Repositories;
-using joinfreela.Domain.Interfaces.Repositories.Base;
 using joinfreela.Domain.Models;
 using joinfreela.Infrastructure.Data;
 using joinfreela.Infrastructure.Repositories.Base;

@@ -51,15 +51,14 @@ namespace joinfreela.Application.Services
         public override async Task<FreelancerResponse> UpdateAsync(int id,FreelancerRequest request)
         {
             _freelancerRepository.AddPreQuery(query=> query.Include(fr=>fr.Skills).ThenInclude(us=>us.Skill));
+            var freelancer = await _freelancerRepository.GetByIdAsync(id);
 
+            _freelancerRepository.AddPreQuery(query=> query.Where(fr=>fr.Id != _authService.AuthUser.Id));
             var validationResult = await _freelancerRequestvalidator.ValidateAsync(request);
             if ( ! validationResult.IsValid)
                 throw new BadRequestException(validationResult);
-            
-            var freelancer = await _freelancerRepository.GetByIdAsync(id);
             if (freelancer is null)
                 throw new NotFoundException("O id informado não existe");
-            
             if(freelancer.Id != _authService.AuthUser.Id)
                 throw new NotAuthorizedException();
             
@@ -67,7 +66,6 @@ namespace joinfreela.Application.Services
             await _freelancerRepository.UpdateAsync(freelancer);
             //interaction
             await _unityOfWork.CommitChangesAsync();
-            
             return _mapper.Map<FreelancerResponse>(freelancer);
         }
 
